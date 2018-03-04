@@ -1,0 +1,27 @@
+<nav class="navbar navbar-fixed-top">
+    <h4 class="text-center text-success back_index" >
+        <a href="#/notice" class="pull-left pull" style="font-size:16px;">返回</a>
+        <div class="title">添加公告</div>
+    </h4>
+</nav>
+<!--中间内容-->
+<div style="height:60px;width:100%;"></div>
+<div class="container-fluid" ng-controller="addNoticeCtrl">
+    <form  role="form">
+        <div class="row text-center" id="select">
+            <select class="select" name="chooseP" ng-model="pinpai" ng-options="pinpai.brandname for pinpai in data">
+                <option value=""  class="chooseP">选择品牌</option>
+            </select>
+           <!--  <select class="select" name="chooseS" ng-model="shangpin" ng-options="shangpin for shangpin in pinpai.goods">
+                <option value=""  class="chooseS">请选择商品</option>
+            </select> -->
+        </div>
+        <div class="form-group">
+            <label for="addCount">添加内容:</label>
+            <textarea class="form-control" id="addCount" name="addCount"  required placeholder="请输入内容..."></textarea>
+        </div>
+        <input type="submit" class="btn btn-success btn-block" id="pushContent" value="发表内容"/>
+    </form>
+
+
+</div>

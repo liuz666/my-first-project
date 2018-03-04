@@ -1,0 +1,64 @@
+<!--头部导航-->
+<nav class="navbar navbar-fixed-top">
+    <h4 class="text-center text-success back_index" >
+        <a href="#/sales" class="pull-left pull" style="font-size:16px;">返回</a>
+        <div class="title">零售发货</div>
+    </h4>
+</nav>
+<!--中间内容-->
+<div style="height:55px;width:100%;"></div>
+<div class="container-fluid" ng-controller="zeroCtrl">
+     <div class="placeholderLoad" style="margin-left:-15px;">
+        <img src="img/load.gif" alt="加载中.....">
+         <a href="javascript:location.reload()" style="display:none;"><p class="text-center refresh">点击我刷新重试</p></a>
+     </div>
+    <div class="row">
+        <div class="well">
+            <div class="media">
+                <p><b style="color:#FF5305;">{{activeArr.brand_name}}:</b> {{activeVal}}</p>
+                <a class="pull-left"><img class="media-object  img-responsive" ng-src="img/{{activeImg}}" width="100" height="100"></a>
+                <div class="media-body">
+                    <div class="media">一共 {{activeBig}} 箱，{{activeSmall}} 盒</div>
+                    <div class="media">
+                        <button class="btn btn-info btn-block cha" ng-click="cha()">库存拆分</button>
+                        <button class="btn btn-info btn-block he" ng-click="he()">库存合并</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <!-- 品牌选项-->
+    <div style="font-weight:bold;">品牌分类:</div>
+    <div class="row" style="padding-top:0px;font-size:12px;">
+        <ul class="brand">
+            <li ng-click="oneClick($index)"  ng-class={'defaultClass':$index!=currIndex,'activeClass':$index==currIndex} ng-repeat="pin in pinpaiData">{{pin.brand_name}}</li>
+        </ul>
+    </div>
+    <!-- 商品内容 模块-->
+    <div style="font-weight:bold;">商品分类:</div>
+    <div class="product" style="padding-top:0;font-size:12px;">
+        <div class="row">
+            <ul ng-repeat="u in pinpaiData" class="product_box">
+                <li ng-repeat="c in u.goods"  ng-class={'defaultClass':$index!=choseIndex,'activeClass':$index==choseIndex} ng-click="twoClick($index)" >
+                    {{c.goods_name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+   
+    <!-- 发货盒数量-->
+    <div class="row box" style="margin-top:10px;border-top:1px solid #ddd;padding-top:5px;">
+        <div style="width:20%;text-align:center;height:34px;line-height:34px;">盒数:</div>
+        <div style="width:60%">
+            <div class="input-group">
+                <span class="input-group-addon" ng-click="deleCount()">-</span>
+                <input type="number" min="0"  class="form-control" id="sendCount" ng-model="sendCount" ng-focus="ff()" required>
+                <span class="input-group-addon" ng-click="addCount()">+</span>
+            </div>
+        </div>
+    </div>
+    <!-- 发货按钮-->
+    <button  class="sendZero" ng-click="sendZero()">发 货</button>
+
+</div>

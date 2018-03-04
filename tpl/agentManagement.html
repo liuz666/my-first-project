@@ -1,0 +1,41 @@
+<!--头部导航-->
+<nav class="navbar navbar-fixed-top">
+    <h4 class="text-center text-success back_index" >
+        <a href="#/next_management" class="pull-left pull" style="font-size:16px;">返回</a>
+        <div class="title">代理信息</div>
+    </h4>
+</nav>
+<!--中间内容-->
+<div style="height:60px;width:100%;"></div>
+<div class="container-fluid" ng-controller="shangAdminCtrl">
+    <div class="placeholderLoad" style="margin-left:-15px;">
+        <img src="img/load.gif" alt="加载中.....">
+        <a href="javascript:location.reload()" style="display:none;"><p class="text-center refresh">点击我刷新重试</p></a>
+    </div>
+    <table class="table table-responsive">
+           <!--  <caption class="text-center">代理信息</caption> -->
+            <thead>
+            <tr>
+               <!--  <th><input type="checkbox"/></th> -->
+                <!-- <th >ID</th> -->
+                <th class="text-center">代理信息</th>
+                <!-- <th class="text-center">状态</th> -->
+            </tr>
+            </thead>
+            <tbody>         
+                <tr ng-repeat="data in data">
+                   <!--  <th><input type="checkbox"/></th> -->
+                  <!--   <td></td> -->
+                    <td>
+                        <div>姓名：{{data.name}}</div>
+                        <div>编号：{{data.agentid}} <a href="#/agentManagement?xiaji={{data.id}}&brand_id={{url4}}">下级(<span style="color:red;">{{data.total}}</span>)</a></div>
+                        <div>等级：{{data.dengjiname}}</div>
+                        <div>上级：{{data.sjdata.name}}</div>
+                    </td>
+                   <!--  <td class="text-center">查看授权</td> -->
+                </tr>
+           
+            </tbody>
+        </table>
+   <!--  <button class="btn btn-default pull-right">删除记录</button> -->
+</div>

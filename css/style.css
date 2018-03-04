@@ -1,0 +1,980 @@
+/*********************************公共样式******************************************/
+html,body{height:100%;}
+a:hover{text-decoration:none;}
+.navbar{background:#FFCF25;border:none;}/*头部样式*/
+.back_index{ /*头部导航 返回按钮样式*/
+    height: 35px;
+    padding: 15px 5px;
+    font-size: 20px;
+    color:#fff;
+    line-height: 5px;
+}
+.back_index a{color:#000;}
+.title{font-weight:bold;color:#000;}
+.pull{
+    position:absolute;
+    left:20px;
+}
+.addNotice{ /*添加公告样式*/
+    position:relative;
+    right:10px;
+    cursor:pointer;
+}
+.addNotice:hover{text-decoration: none;}
+.container-fluid{
+    /*margin-top:80px;*/
+    margin-bottom:60px;
+}
+/*禁用上下按钮*/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+input[type="number"]{-moz-appearance:textfield;}
+/*点我刷新样式*/
+.refresh{font-size:16px;color:#fff;}
+.defaultClass{ /*默认样式*/
+    padding:5px;
+    /*background:#e4393c;*/
+    color:#000;
+    border-radius:5px;
+}
+.activeClass{ /*被点击了时候的样式*/
+    padding:5px;
+    color:#fff;
+    background:#FF5305;
+    border-radius:10px;
+}
+/******************************start 首页样式**************************/
+.swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
+    bottom: 15px;
+    left: 0;
+    width: 100%;
+}
+.swiper-container{ /*引导页样式*/
+    position:absolute;
+
+    z-index:10000;
+}
+.inStart{ /*引导页 点击进入首页按钮样式*/
+    width:30%;position:absolute;bottom:50px;left:35%;
+}
+#startTitp{ /*******新手引导步骤的样式*****/
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index:1050;
+    background:rgba(0,0,0,0.5);
+}
+.titp-1{
+    width:50%;
+    height:50%;
+    position:absolute;
+    top:10%;
+    left:25%;
+}
+.titp-2{
+    position:absolute;
+    bottom:15%;
+}
+/*第二步 下线邀请*/
+.sendFriend{
+    width:50%;
+    height:27%;
+    position:absolute;
+    top:5%;
+    left:51%;
+}
+.nextSend{
+    position:absolute;
+    left:33%;
+    top:50%;
+}
+/*第三步 库存管理*/
+.zeroSend{
+    position:absolute;
+    top:1%;
+    left:13%;
+}
+.sale{
+    position:absolute;
+    left:0%;
+    top:50%;
+}
+.startSection{margin-top:55px;}
+/*首页头像 背景*/
+.startHead{
+    background-image:url('../img/013.png');
+    background-size: cover;
+    margin-top:-2px;
+}
+/*头像样式*/
+.media > .pull-left{
+    padding:10px;
+    padding-left:15px;
+}
+/*姓名，等级样式*/
+.info{
+    margin-top:20px;font-size:16px;color:#fff;
+}
+/*申请升级样式*/
+.update{
+    width:100px;
+    /*line-height: 20px;*/
+    border:1px solid #fff;
+    border-radius:3px;
+    padding-left:35px;
+    /*padding-top:3%;*/
+    /*padding-bottom:3%;*/
+    margin-left:-15px;
+    background:url("../img/down01.png") no-repeat;
+    cursor:pointer;
+    color:#fff;
+}
+/*公告样式*/
+#gg{  padding:10px;background:#fff; }
+#gg span{margin-left:5%; font-size:18px; color:#000;}
+#gg a:hover{text-decoration:none;}
+/*消息通知样式*/
+.alerts{
+    width:100%;
+    height:30px;
+    line-height:30px;
+    margin-top:-15px;
+    padding-left:15px;
+    background:#fff;
+    color:#000;
+    display:none;
+}
+.alerts>span{background:red;color:#fff;}
+.alerts:hover{
+    text-decoration:none;
+    cursor:pointer;
+    background:#ddd;
+}
+/***********九宫格样式********/
+.nine{position:relative;margin-top:20px;}/*九宫格*/
+.nine a:hover{text-decoration: none;}
+.nine a{
+    display:block;
+    height:55px;
+    text-align:center;
+    color:#000;
+    border:1px solid red;
+}
+.nine  img{ /*九宫格 图* 只设置高度实现等比缩放*/
+    /*width:40%;*/
+    height:55%;
+}
+.nine  div{
+    margin-top:10px;
+}
+/*888888888*/
+.startUl li{
+    float:left;
+    width:33.3%;
+    height:95px;
+    /*line-height:90px;*/
+}
+.startUl li a{ /*字体居中*/
+    text-align:center;
+    color:#000;
+    border:1px solid transparent;
+}
+.startUl li a:hover{text-decoration:none;}
+.startUl li a img{ /*图片大小*/
+    /*width:55%;*/
+    height:45%;
+}
+.startUl li a div{margin-top:5px;}
+/********888888********/
+.start_badge{
+    position:absolute;
+    top:0px;
+    right:0px;
+    background:#e4393c;
+    color:#fff;
+}
+/*首页关注我们*/
+.focusWe{
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index:999;
+    background:rgba(0,0,0,0.5);
+    display:none;
+}
+.focusWe>div{
+    width:80%;
+    /*height:80px;*/
+    position:absolute;
+    top:25%;
+    left:10%;
+    z-index:10000;
+    padding:10px;
+    background-color: #fff;
+    background-clip: padding-box;
+
+    border-radius: 6px;
+    outline: 0;
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+}
+/******************************销售页面***********************************/
+.salesActive{
+    font-size:16px;
+    position:absolute;
+    right:20px;
+    top:20px;
+    cursor:pointer;
+}
+.salesUl{ /*二级菜单*/
+    position:absolute;
+    width:110px;
+    height:60px;
+    top:42px;
+    right:-8px;
+    background:#3E3E40;
+    color:#fff;
+    font-size:14px;
+    border-radius:3px;
+    display:none;
+}
+.salesUl li{
+    padding:5px;
+    border-bottom:1px solid #fff;
+}
+/*.salesUl li img{margin-right:6px;}*/
+.salesUl li a{color:#fff; }
+.salesUl li a:hover{text-decoration:none;}
+.salesUl li:hover{  background:red;  }
+.tri{ /*三角箭头*/
+    position: absolute;
+    top: -17px;
+    right:10px;
+    width: 0px;
+    height: 0px;
+    border: 7px solid transparent;
+    border-bottom: 10px solid #3E3E40;
+}
+.placeholderLoad{ /*加载中样式*/
+    position:fixed;
+    z-index:1100;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+    margin-top:-25px;
+
+}
+.placeholderLoad img{
+    display:block;
+    margin:0 auto;
+    margin-top:50%;
+    border-radius:8px;
+}
+.sales_well{padding:5px 15px;border-bottom:1px solid #ddd;}/*图片 产品介绍样式*/
+.sales_well img{}
+.navbar-footer-menu{ /*ul样式*/
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+.foot{margin-top:0;padding:0;} /*设置ul父元素的内外边距*/
+.navbar-footer-menu li{ /*设置li样式*/
+    /*display:inline-block;*/
+    float:left;
+    line-height:50px;
+    text-align:center;
+    font-size:16px;
+    cursor:pointer;
+}
+/*零售按钮、代理按钮样式*/
+.btn-block + .btn-block{margin-top:0px;}/*覆盖boot默认样式*/
+.navbar-footer-menu li:nth-child(1){width:40%;background:#FE9402;}
+.navbar-footer-menu li:nth-child(2){width:60%;background:#e4393c;}
+.navbar-footer-menu li:nth-child(1)>a{color:#fff;display:inline-block;width:100%;height:100%;}
+.navbar-footer-menu li:nth-child(2)>a{color:#fff;}
+
+.cha{margin-top:5px;margin-bottom:15px;}/*代理发货 库存拆分按钮之间的距离*/
+/*代理 模态框样式*/
+#modal{ /*最外面的遮罩层*/
+    position:fixed;
+    top:0;left:0;right:0;bottom:0;
+    width:100%;height:100%;
+    background-color:rgba(0,0,0,0.5);
+    display:none;
+}
+/*关闭按钮*/
+#mod button[class="close"]{padding:4px;padding-right:8px;}
+/*中间层*/
+#mod{
+    width:100%;height:66%;background:#fff;
+    position:fixed;
+    bottom:0px;
+    z-index:1500;
+    display:none;
+}
+.modal-footer{margin:0;padding:0;}
+.brand{ /*品牌选项样式 ul*/
+    margin-left:15px;
+    margin-top:10px;
+    margin-bottom:50px;
+}
+.brand li{
+    float:left;
+    margin-right:5%;
+}
+/*产品内容*/
+.product div ul{ /*先把商品的所有内容隐藏*/
+    display:none;
+}
+.product ul li{float:left;margin-left:5%;margin-top:3%;}
+.product ul:nth-child(1){display:block;} /*然后设置默认显示第一条*/
+
+/*确认选择按钮*/
+.sure_btn{
+    position:fixed;
+    bottom:0px;
+    border:none;
+    font-size:16px;
+    background:#FF5001;
+    color:#fff;
+    width:100%;
+    height:50px;
+    line-height: 50px;
+    text-align: center;
+}
+/*******************************发货记录页面************************************/
+.status{
+    position:absolute;
+    top:25px;
+    right:30px;
+}
+/******************************授权证书页面***********************************/
+/*选择证书按钮*/
+.choose li{
+    font-family: "Microsoft Yahei";
+    width:28%;
+    float:left;
+    margin-left:4%;
+    margin-bottom:5px;
+    font-size:16px;
+    text-align:center;
+}
+
+/*证书 图像样式*/
+.imgs .img_box{display:none}
+.imgs .img_box:nth-child(1){display:block;}
+
+
+/*******************************零售页面***********************************/
+.sendZero{
+    position: fixed;
+    left:0;
+    bottom: 0;
+    font-size: 16px;
+    background:#FF5305;
+    color:#fff;
+    width:100%;
+    border:none;
+    height:50px;
+}
+
+/******************************操作教程页面***********************************/
+.maodian{
+    width:100%;
+    height:150px;
+    margin-top:0px;
+}
+.maodian li{
+    width:50%;
+    float:left;
+}
+.top{ /*返回顶部*/
+    width:60px;height:60px;border-radius:50%;line-height:60px;background:#ccc;position:fixed;bottom:50px;right:20px;
+    color:#000;
+}
+/***********************下级管理页面***********************************/
+.txt{margin-top:10px;}
+.mmList>div{display:none} /*切换品牌显示对应内容*/
+.mmList>div:nth-child(1){display:block;}
+
+/***********************个人中心页面***********************************/
+
+.geren{ /*个人中心背景图片*/
+    height:200px;
+    background:url(../img/640.png) no-repeat center center;
+    background-size:100% 100%;
+}
+.personal_table{border:1px solid #ddd;border-collapse:separate;}
+.personal_table > tbody > tr > td {border:none;vertical-align:middle;}
+/*脚部样式*/
+.out{border-top:1px solid #ddd;border-bottom:1px solid #ddd;padding:8px 0;}
+.navbar-fixed-bottom{margin-top:5px;}
+.listImg{
+    float:right;
+    width:12px;
+}
+.liBtn{ /*脱离团体按钮*/
+    min-width:100%;
+    color:#fff;
+    background:#E2E2E2;
+    height:50px;
+    line-height: 50px;
+    border-radius:50px;
+    font-size:16px;
+    outline: none;
+}
+
+/************个人-品牌升请页面************/
+.shenq input{
+    outline:none;
+    border:1px solid #FFCF25;
+}
+.shenq input::-webkit-input-placeholder{
+    color:#666666;
+}
+.shenq input::-moz-placeholder{
+    color:#666666;
+}
+.shenq input:-ms-input-placeholder{
+    color:#666666;
+}
+/***********************************公告页面***********************************/
+/*公告 发布时间，等级*/
+.noticeTitle{
+    padding:10px;
+    margin-top:10px;
+    margin-bottom:20px;
+}
+/*公告详细内容*/
+.noticeContent{
+    margin-top:25px;
+    margin-left:30px;
+}
+#wellContent .wellContent{
+    display:none;
+}
+#wellContent .wellContent:nth-child(1){display:block;}
+
+/***********************************添加公告页面*******************************/
+#select{
+    margin-bottom:10px;
+}
+.select{
+    width: 150px;
+    height:30px;
+    line-height: 30px;
+    border-radius: 5px;
+    border:1px solid #ccc;
+    font-size: 12px;
+    padding:0 10px;
+    position: relative;
+    cursor:pointer;
+}
+.select_box{
+    height:30px !important;
+    line-height: 30px !important;
+    border:1px solid red !important;
+}
+
+/***********************************数据分析页面***********************************/
+ul{  margin:0;padding:0;  list-style: none;  }
+
+.dataBox li{float:left; width:33%;height:30px;line-height:30px;text-align:center;}
+.hours{overflow:hidden;}
+.hours li,.yuj li{ display:inline-block;width:62px;height:30px;text-align:center;line-height:30px;background:#ddd;margin-right:2px;border-radius:3px;}
+.dataBox .active{border-bottom:1px solid #FED201}
+.hours .active,.yuj .active{background:#FED201;}
+.salesRking,.info_warning{float:left;width:50%;text-align:center;padding:4% 0;background:#FF5001;color:#fff;}
+.info_warning{border-left:1px solid white;}
+/*消息预警样式*/
+.warning_info{border:1px solid #ddd;text-align:left;padding:5px 0;padding-left:5px;}
+
+/*******************************销售排名页面**********************************/
+.select_type{ /*下拉选择样式*/
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    padding: 0 10px;
+    cursor: pointer;
+}
+.select_data{
+    display:inline-block;
+    font-weight:bold;
+}
+/*遮罩层*/
+.dataUl{display:none;height:100%;width:100%;margin-left:-15px;background:#fff;position:fixed;top:106px;z-index:1000;}/**/
+.item{ /*一级菜单*/
+    width:30%;
+    height:100%;
+    background:#d2dcf8;
+}
+.item>li{
+    padding:20px 0;
+    text-align:center;
+    position:relative;
+    z-index:300;
+}
+.item>li:hover{background:#fff;border:1px solid #ddd ;border-right:none;}
+.item_box{ /*二级菜单*/
+    display:none;
+    width:200px;
+    border:1px solid #ddd;
+    background:red;
+    position:absolute;
+    left:95%;
+    top:-1px;
+    z-index:10
+}
+.item_box>li{padding:10px;}
+.item>li:hover .item_box{display:block;}
+
+.listPM{ /*排行列表样式*/
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+    background:#fff;
+    padding:10px;
+    margin-bottom:5px;
+}
+.mc,.name{ /*名次，名字样式*/
+    margin-top:12px;font-size:18px;
+}
+.score{ /*分数样式*/
+    color:#02B401;font-size:20px;margin-top:11px;
+
+}
+.pinp{overflow: hidden;height: 50px;line-height: 50px;}
+.pinp li{float:left;width:33.3%;text-align:center;cursor:pointer;}
+/************************预警管理页面*********************************/
+.waringTitp li{width:55px;}
+.tab-pane .alert{margin-bottom:5px;}
+.yuj{text-align:center;}
+.yuj li{width:85px;text-align:center;}
+
+
+/***********************************意见反馈页面***********************************/
+textarea[class="form-control"]{
+    height:150px;
+}
+
+/***********************************确认订单页面***********************************/
+.count_box{ /*添加箱 盒 样式*/
+    padding-bottom:35px;
+    padding-left:15px;
+}
+.count{
+    padding-left:0;
+}
+.count_box button{padding:4px;}
+.input-group .form-control { /*数量输入框*/
+    position: relative;
+    z-index: 0;
+}
+.dlBox{
+    /*border:1px solid #000;*/
+    width:100%;
+    height:70%;
+    position:absolute;
+    overflow-y:auto;
+}
+/*下级代理选择样式*/
+.next_daili{
+    margin-top:0px;
+    margin-bottom:25px;
+    cursor:pointer;
+}
+/*发货按钮*/
+.send{
+    position:fixed;
+    z-index:0;
+    bottom:0;
+    font-size:16px;
+    background:#FF5305;
+    color:#fff;
+    width:100%;
+    border:none;
+    height:50px;
+}
+.box div{
+    float:left;
+    margin-bottom:5px;
+}
+/*选择代理 模态框样式 */
+#dlTxt{display:none;margin:50% auto;font-size:16px;}
+.daiLiMod{ /*遮罩层*/
+    position:fixed;
+    top:0;left:0;right:0;bottom:0;
+    width:100%;height:100%;
+    background-color:rgba(0,0,0,0.5);
+    display:none;
+}
+.daiLiContent{ /*内容*/
+    width:100%;height:66%;background:#fff;
+    position:fixed;
+    bottom:0px;
+    z-index:1500;
+    display:none;
+}
+.daiLiContent .listBg{
+    background:#F2DEDE !important;
+    color:#A94442 !important;
+}
+/**************************************下线邀请************************************/
+.erweimaChoose li{
+    width:28%;
+    float:left;
+    margin-left:4%;
+    margin-bottom:5px;
+    font-size:16px;
+    text-align:center;
+}
+.erweima>div{display:none}
+.erweima>div:nth-child(1){display:block;}
+
+/**************************************新建库存************************************/
+#addCount{
+
+}
+[for="addBox"],[for="addCount"],[for="addName"]{
+    height:34px;
+    line-height:34px;
+}
+/********************************登录页面*****************************************/
+.aside_container{
+    width:100%;
+    height:100%;
+}
+.loaderBox{ /*启动页*/
+    position: fixed;
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    background:url(../img/start.png) no-repeat center center;
+    background-size:100% 100%;
+}
+.bg{ /*登录页背景图片*/
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0;
+    z-index: -1;
+    /*background: #FFCF25;*/
+    background:url(../img/loginBg.png) no-repeat center center;
+    background-size:100% 100%;
+}
+
+.loginName,.loginPw{
+    border-bottom:1px solid #000;
+    margin-bottom: 15px;
+}
+.loginName span,.loginPw span{
+    float:left;
+    width: 15%;
+    height: 40px;
+    border-right:1px solid #000;
+}
+.loginName span{ /*手机图标*/
+    background:url(../img/phone1.png) no-repeat center center;
+    background-size:20px 20px;
+}
+.loginPw span{ /*密码图标*/
+    background:url(../img/password.png) no-repeat center center;
+    background-size:20px 20px;
+}
+.loginName input,.loginPw input{ /*用户名 ,密码样式*/
+    width: 85%;
+    height: 40px;
+    padding-left:20px;
+    border:none;
+    background:transparent;
+    margin-bottom:5px;
+    outline:none;
+}
+.loginBtn{ /*登录按钮*/
+    width:100%;
+    height: 45px;
+    background:transparent;
+    border:1px solid #000;
+}
+.forgetPw{ /*忘记密码*/
+    float:right;
+    color: #000;
+    border-bottom:1px solid #000;
+}
+/*设置占位字体颜色*/
+.loginName input::-webkit-input-placeholder,.loginPw input::-webkit-input-placeholder { /* WebKit browsers */
+    color: black;
+}
+.loginName input::-webkit-input-placeholder,.loginPw input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: black;
+}
+.loginName input::-webkit-input-placeholder,.loginPw input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: black;
+}
+.loginName input::-webkit-input-placeholder,.loginPw input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: black; }
+/********************************************忘记密码样式********************************************/
+.yzm input:first-child{
+    width:60%;
+    height:40px;
+    outline:none;
+    border:1px solid #3879D9;
+    padding-left:10px;
+}
+.yzm #send{
+    width:38%;
+    height:40px;
+    outline:none;
+    border:none;
+    background:#3879D9;
+    text-align:center;
+}
+/*******************************应用插件页面样式************************************/
+.plugCtrl{ /*页面背景颜色 和尺寸*/
+    height:100%;width:100%;background:#EEEEEE;
+}
+/*插件页面操作提示引导*/
+#plugTitp,#configTitp,.hasIntallTitp{
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0px;
+    z-index:1050;
+    background:rgba(0,0,0,0.5);
+}
+.installTitl{ /*选择要安装的插件提示*/
+    width:220px;
+    height:25px;
+    line-height:25px;
+    text-align: center;
+    background:#fff;
+    position:absolute;
+    top:293px;
+    right:8px;
+    z-index:1060;
+    font-size:14px;
+    box-shadow:0px 5px 40px #FFF;
+}
+.basicInfo,.giftInfo,.show,.shenhe{ /*基础配置提示功能样式*/
+    width:250px;
+    height:25px;
+    line-height:25px;
+    text-align: center;
+    background:#fff;
+    position:absolute;
+    top:125px;
+    left:20px;
+    z-index:1060;
+    font-size:14px;
+    box-shadow:0px 5px 40px #FFF;
+}
+.giftInfo{position:absolute;top:180px;  left:20px;}/*奖品配置提示功能样式*/
+.show{ position:absolute;  top:245px;  left:20px;} /*查看演示效果提示功能样式*/
+.shenhe{position:absolute;  top:280px;  left:20px;}/*审核页面提示功能样式*/
+.triangle-up,.triangle-up1,.triangle-up3{ /*提示功能上的三角形*/
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid #fff;
+    position: absolute;
+    top: -18px;
+    left: 15px;
+}
+.triangle-up3{position: absolute;  top: -18px;  left:160px;}
+.triangle-up1{position: absolute; top:-18px; left:180px;  }
+.twoTitp,.threeTitp,.fousTitp,.fiveTitp{display:none;}/*只显示第一步提示，其他隐藏*/
+.closeTitp,.nextStep{ /*下一步按钮样式*/
+    width:50%;
+    height:40px;
+    line-height:40px;
+    background:#fff;
+    border-radius:5px;
+    position:absolute;
+    left:25%;
+    bottom:15px;
+    z-index: 1060;
+    box-shadow: 0px 5px 40px 3px #fff;
+    text-align: center;
+    font-size:16px;
+    color:#000;
+}
+.install,.peizhi,.Installed{ /*安装按钮样式*/
+    padding:8px;
+    height:50px;
+    line-height:50px;
+    text-align:center;
+    background:#19C832;
+    color:#fff;
+    border-radius:3px;
+}
+.peizhi{  background:red;  }
+.Installed{ background:#ddd;}
+.seePlug{ /*查看已安装应用 按钮样式*/
+    min-width:100%;
+    height:50px;
+    line-height:50px;
+    text-align:center;
+    background:#FFCF25;
+    color:#000;
+    font-size:16px;
+    position:fixed;
+    bottom:0px;
+    cursor:pointer;
+}
+.statusList{ /*插件安装状态样式*/
+    background:#fff;
+    border-top:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    overflow:auto;
+    margin-bottom:5px;
+    padding-top:8px;
+    padding-bottom:8px;
+}
+.reset,.results,.inActive{ /*按钮样式*/
+    float:right;
+    padding:5px;
+    margin-left:10px;
+    text-align:center;
+    color:#fff;
+    font-size:12px;
+    border-radius:3px;
+}
+.reset{ /*重置按钮*/
+    background:#e4393c;
+}
+.results{ /*查看结果按钮*/
+    background:#FFCF25;
+}
+.sms{width: 80%;height: 90px;background: #1A71B9;position: fixed;top: 35%;left: 10%;opacity: 0.8;line-height: 90px;text-align: center;color: #fff;display: none;border-radius: 0.5rem; font-size: 1.5rem;z-index:66;}
+.bgg{position: fixed;top: 0%;left: 0%;width: 100%;height: 100%;background-color: #333333;opacity: .60;z-index: 55;display:none;}
+a:focus{outline:none;}
+.inActive{ /*进入按钮*/
+    background:#1AC833;
+}
+/**************已安装应用样式***************/
+.yanshi{
+    padding:5px;
+    border-top:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    margin-bottom:10px;
+    background:#fff;
+}
+.in2,.results2,.reset2{
+    float:left;
+    padding:5px;
+    margin-left:10px;
+    text-align:center;
+    color:#fff;
+    font-size:12px;
+    border-radius:3px;
+    background:#FFCF25;
+}
+.inTitp,.showTitp,.newTitp,.pzTitp,.whyTitp{
+    width:250px;
+    height:50px;
+    /*line-height:50px;*/
+    text-align: center;
+    background:#fff;
+    position:absolute;
+    top:169px;
+    left:8px;
+    z-index:1060;
+    font-size:14px;
+    box-shadow:0px 5px 40px #FFF;
+}
+.showTitp{position:absolute;top:169px; left:47px;width:200px;height:50px;}
+.pzTitp{position:absolute;top:169px; left:116px;width:200px;height:60px;}
+.whyTitp{position:absolute;top:169px; left:155px;width:160px;height:60px;}
+.newTitp{position:absolute;top:169px; left:113px;width:205px;height:50px;}
+/***************安装应用页面样式************/
+.installPlug{
+    min-width:100%;
+    height:50px;
+    line-height:50px;
+    text-align:center;
+    background:#19C832;
+    color:#fff;
+    font-size:16px;
+    position:fixed;
+    bottom:0px;
+    cursor:pointer;
+}
+
+/*************通用配置页面样式******************/
+.config>div{display:none;}
+.config>div:nth-child(1){display:block;}
+.aside .activeConfigClass{color:#EA231F ;}
+.aside{ /*左边侧边栏*/
+    width:30%;
+    height:100%;
+    float:left;
+    background:#FFCF25;
+    margin-left:0px;
+    margin-top:55px;
+}
+.rightContent{ /*右边内容*/
+    width:70%;
+    height:100%;
+    float:right;
+    margin-top:55px;
+}
+.aside ul{height:100%;}
+.aside li{height:10%;text-align:center;}
+.aside li:hover{cursor:pointer;}
+.aside li>span{display:none;}
+.aside li>a{font-weight:bold;font-size:14px;color:#000;;}
+/******基础配置页面样式*********/
+.libian{margin-top:10%;}
+.libian>div:nth-child(1){ /*裂变二维码 上传文件样式*/
+    float:left;
+}
+.libian>div:nth-child(2){ /*裂变二维码 上传文件样式*/
+    float:right;
+}
+/*********奖品配置页面样式**************/
+.suiji input:nth-child(1){ /*随机抽奖样式*/
+    width:70%;
+    float:left;
+    margin-right:5px;
+}
+.suiji input:nth-child(2){ /*随机抽奖样式*/
+    width:20%;
+    float:left;
+}
+.paiming{margin-bottom:5px;}
+.paiming_box p{ /*排名奖样式*/
+    padding-left:15px;
+    padding-top:15px;
+    margin-top:10%;
+    border-top:1px solid #ccc;
+    font-weight:bold;
+}
+.paiming_box input{
+    width:50%;
+    float:left;
+    margin-left:10px;
+}
+.ranking{
+    float:left;
+    display:inline-block;
+    margin-left:10px;
+    margin-top:4px;
+    padding:1px 7px;
+    background:#FFCF25;
+    border-radius:10px;
+    vertical-align: middle;
+}
+.ranking2{
+    display:inline-block;
+    margin-left:10px;
+    margin-top:4px;
+    padding:1px 7px;
+    background:#ccc;
+    color:#fff;
+    vertical-align: middle;
+}

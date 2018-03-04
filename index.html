@@ -1,0 +1,2144 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style.css"/>
+	<link rel="stylesheet" href="css/ui-dialog.css"/><!--弹窗框插件-->
+	<link rel="stylesheet" href="css/swiper-3.4.0.min.css"><!--滑动页插件-->
+	<script type="text/javascript">
+    window.zhuge = window.zhuge || [];
+    window.zhuge.methods = "_init debug identify track trackLink trackForm page".split(" ");
+    window.zhuge.factory = function(b) {
+        return function() {
+            var a = Array.prototype.slice.call(arguments);
+            a.unshift(b);
+            window.zhuge.push(a);
+            return window.zhuge;
+        }
+    };
+    for (var i = 0; i < window.zhuge.methods.length; i++) {
+        var key = window.zhuge.methods[i];
+        window.zhuge[key] = window.zhuge.factory(key);
+    }
+    window.zhuge.load = function(b, x) {
+        if (!document.getElementById("zhuge-js")) {
+            var a = document.createElement("script");
+            var verDate = new Date();
+            var verStr = verDate.getFullYear().toString()
+                + verDate.getMonth().toString() + verDate.getDate().toString();
+            a.type = "text/javascript";
+            a.id = "zhuge-js";
+            a.async = !0;
+            a.src = (location.protocol == 'http:' ? "http://sdk.zhugeio.com/zhuge.min.js?v=" : 'https://zgsdk.zhugeio.com/zhuge.min.js?v=') + verStr;
+            var c = document.getElementsByTagName("script")[0];
+            c.parentNode.insertBefore(a, c);
+            window.zhuge._init(b, x)
+        }
+    };
+    window.zhuge.load('dff1d8497deb4e70a92430c8fc0bda2b');
+    </script>
+	<script src="js/angular.min.js"></script>
+	<script src="js/angular-route.min.js"></script>
+	 <script src="js/jquery-1.11.3.js"></script>
+	<script src="js/script.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/dialog-min.js"></script><!--弹窗框插件-->
+	<script src="js/swiper-3.4.0.min.js"></script><!--滑动页插件-->
+	
+</head>
+<body ng-controller="parentCtrl">
+	<div ng-view style="height:100%;">
+
+	</div>
+	<script>
+		/*** Created by Administrator on 2016/11/10.*/
+		//申明模块,依赖于ng 和 ngRoute模块
+		var app=angular.module('myApp',['ng','ngRoute']);
+		//配置路由词典
+		app.config(function($routeProvider,$compileProvider ,$controllerProvider){
+			app.registerCtrl = $controllerProvider.register;
+			app.resolveScriptDeps = function(dependencies){
+			   return function($q,$rootScope){
+			      var deferred = $q.defer();
+			      $script(dependencies, function() {
+			         // all dependencies have now been loaded by $script.js so resolve the promise
+			         $rootScope.$apply(function(){
+			            deferred.resolve();
+			         });
+			      });
+			      return deferred.promise;
+			   }
+			}; /*不同页面引用不同JS文件*/
+			$routeProvider
+					.when('/start',{templateUrl:'tpl/start.html'})
+					.when('/suerGoods',{templateUrl:'tpl/suerGoods.html'})/*首页确认收货*/
+					.when('/sales',{templateUrl:'tpl/sales.html'})/*销售页面*/
+					.when('/zero',{templateUrl:'tpl/zero.html'})/*零售发货*/
+					.when('/gives',{templateUrl:'tpl/gives.html'})/*授权证书*/
+					.when('/help',{templateUrl:'tpl/help.html'})/*审核代理*/
+					.when('/data',{templateUrl:'tpl/data.html',resolve: {
+					   deps: app.resolveScriptDeps([
+					      'js/echarts.min.js'
+					   ])
+					}})/*数据分析*/
+					.when('/salesRanking',{templateUrl:'tpl/salesRanking.html'})/*销售排名*/
+					.when('/infoWarning',{templateUrl:'tpl/infoWarning.html'})/*预警管理*/
+					.when('/next_management',{templateUrl:'tpl/next_management.html'})/*下级公告*/
+					.when('/personal',{templateUrl:'tpl/personal.html'})/*个人中心*/
+					.when('/personalDetail',{templateUrl:'tpl/personalDetail.html'})/*个人资料*/
+					.when('/personalNewKc',{templateUrl:'tpl/personalNewKc.html'})/*个人新建库存*/
+					.when('/next_inviter',{templateUrl:'tpl/next_inviter.html'})/*下线邀请*/
+					.when('/shangAdmin',{templateUrl:'tpl/shangAdmin.html'})/*后台经销商*/
+					.when('/notice',{templateUrl:'tpl/notice.html'})/*公告栏*/
+					.when('/addNotice',{templateUrl:'tpl/addNotice.html'})/*添加公告*/
+					.when('/opinion',{templateUrl:'tpl/opinion.html'})/*意见反馈*/
+					.when('/sureOrder',{templateUrl:'tpl/sureOrder.html'})/*确认订单*/
+					.when('/login',{templateUrl:'tpl/login.html'})
+					.when('/mypinpai',{templateUrl:'tpl/myPinpai.html'})
+					.when('/apply_for',{templateUrl:'tpl/apply_for.html'})
+					.when('/apply',{templateUrl:'tpl/apply.html'})
+					.when('/shenq',{templateUrl:'tpl/shenq.html'})
+					.when('/agentManagement',{templateUrl:'tpl/agentManagement.html'})
+					.when('/salesRecord',{templateUrl:'tpl/salesRecord.html'})
+					.when('/upgrade',{templateUrl:'tpl/upgrade.html'})
+					.when('/forget',{templateUrl:'tpl/forget.html'})
+					.when('/plug',{templateUrl:'tpl/plug.html'})/*应用插件*/
+					.when('/plugList',{templateUrl:'tpl/plugList.html'})/*应用列表*/
+					.when('/install',{templateUrl:'tpl/install.html'})/*安装应用*/
+					.when('/config',{templateUrl:'tpl/config.html'})/*通用配置*/
+				//.when('/gives/:names',{templateUrl:'tpl/gives.html',controller:'givesCtrl'})/*接收参数的*/
+					.otherwise({redirectTo:'/login'})/*启动页面，路径错误跳转页面*/
+		});
+		//下拉指令
+		app.directive('infiniteScroll', ['$window', '$timeout', function ($window, $timeout) {/*下拉加载更多指令*/
+			return {
+				link: function (scope, element, attrs) {
+					var windowEl = angular.element($window),
+							bindToWindow = scope.$eval(attrs.window),
+							elm = bindToWindow ? windowEl : element,
+							container = bindToWindow ? document.body : element[0],
+							checkBounds = throttle(checkInfiniteBounds, +attrs.wait || 300);
+					elm.on('scroll', checkBounds);
+					scope.$on('$destroy', function() {
+						elm.off('scroll', checkBounds);
+					});
+					if (attrs.immediateCheck != null && scope.$eval(attrs.immediateCheck)) {
+						$timeout(function () { checkBounds(); });
+					}
+					function throttle(fn, wait) {
+						var last,
+								deferTimer;
+						return function () {
+							var context = this;
+							var now = +new Date(),
+									args = arguments;
+							if (last && now < last + wait) {
+								clearTimeout(deferTimer);
+								deferTimer = setTimeout(function () {
+									last = now;
+									fn.apply(context, args);
+								}, wait);
+							} else {
+								last = now;
+								fn.apply(context, args);
+							}
+						};
+					}
+					function checkInfiniteBounds() {
+						var disabled = scope.$eval(attrs.infiniteScrollDisabled);
+						if (disabled) { return; }
+
+						var maxScroll = getMaxScroll(container.scrollHeight);
+						var clientHeight = bindToWindow ? window.innerHeight || document.documentElement.clientHeight : container.clientHeight;
+
+						if (container.scrollTop + clientHeight >= maxScroll) {
+							scope.$apply(attrs.infiniteScroll || '');
+						}
+					}
+					function getMaxScroll(maximum) {
+						var distance = (attrs.distance || '2.5%').trim();
+						var isPercent = distance.indexOf('%') > -1;
+						return isPercent
+								? maximum * (1 - parseFloat(distance) / 100)
+								: maximum - parseFloat(distance);
+					}
+				}
+			}
+		}]);
+		function showMessage(content,id){ /*封装弹框函数*/
+					var d = dialog({
+						align: 'top', /*弹框位置*/
+						content: content /*弹框内容*/
+					});
+					d.show();
+					setTimeout(function () {
+						d.close().remove();
+					}, 2000);
+					d.show(document.getElementById(id));//根据元素位置来显示弹出框位置
+		}
+		function showRefresh(){ /*封装请求超时，显示刷新函数*/
+			$(".placeholderLoad a").show();
+		}
+		function getLocalTime(nS) {
+			return new Date(parseInt(nS)).toLocaleDateString().replace(/:\d{1,2}$/,' ');
+		}
+
+		//申明一个父控制器
+		app.controller('parentCtrl',function($scope,$location){
+			//参数Path是要跳转的目的地
+			$scope.jump=function(path){ //定义jump方法 使用$location实现跳转
+				$location.path(path);
+			}
+			$scope.shouqi=function(){ /*图片状态*/
+				$(".aside li>a").hide();
+				$(".aside li>span").show();
+				$(".aside p:nth-child(1)").hide();
+				$(".aside p:nth-child(2)").show();
+				$(".aside").css({"width":"20%"});
+				$(".rightContent").css({"width":"80%"})
+			};
+			$scope.zhankai=function(){ /*文字状态*/
+				$(".aside li>a").show();
+				$(".aside li>span").hide();
+				$(".aside p:nth-child(2)").hide();
+				$(".aside p:nth-child(1)").show();
+				$(".aside").css({"width":"30%"});
+				$(".rightContent").css({"width":"70%"})
+			};
+		});
+
+		/*************************************TODO:申明start页面控制器*******************************************/
+	
+		app.controller('startCtrl',function($scope,$http){
+			/*3张引导页*/
+			//$(".swiper-container").height($(window).height());
+			$scope.mySwiper = new Swiper('.swiper-container', { //swiper初始化配置
+				direction: 'horizontal', /*设置水平滑动*/
+				pagination: '.swiper-pagination',//分页图标
+				paginationClickable: true,//分页点击
+				longSwipesRatio: 0.3,
+				touchRatio:1,
+				observer:true,//修改swiper自己或子元素时，自动初始化swiper
+				observeParents:true,//修改swiper的父元素时，自动初始化swiper
+			});
+			$(".navbar").hide();
+			$(".startSection").hide();
+			$scope.inStart=function(){ /*引导页进入首页按钮*/
+				$(".swiper-container").hide();
+				$(".navbar").show();
+				$(".startSection").show();
+			};
+			$http.get('data/start.php?type=session').success(function(data){
+				//console.log(data);
+				$scope.dengji=data[1];
+				$scope.username=data[2];
+				$scope.logins=data[3];
+				//console.log($scope.logins);
+
+				if($scope.logins=='1'){
+					$("#startTitp").show();
+					$("#oneBtn").show().siblings().hide();
+					$scope.nextBtn1=function(){ /*进入第二页*/
+						//console.log($("#twoBtn"));
+						$("#oneBtn").hide();
+						$("#threeBtn").hide();
+						$("#twoBtn").show();
+					};
+					$scope.nextBtn2=function(){ /*进入第三页*/
+						$("#oneBtn").hide();
+						$("#twoBtn").hide();
+						$("#threeBtn").show();
+
+					};
+					$scope.nextBtn3=function(id){ /*关闭所有引导页, 进入主页面*/
+						$("#startTitp").hide();
+						$http.get('data/ajax.php?type='+id).success(function(data){
+							   //console.log(data);
+							})
+					};
+					/*第一次登陆显示3张引导页*/
+					$(".swiper-container").show();
+				}else{
+					$("#startTitp").hide(); /*否则引导步骤隐藏*/
+					$(".swiper-container").hide(); /*否则3张引导页隐藏*/
+					$(".navbar").show(); /*导航显示*/
+					$(".startSection").show(); /*主体内容显示*/
+				}
+
+			});
+
+			$http.get('data/start.php?type=messagetotal',{cache:false}).success(function(data){ /*首页消息通知功能*/	
+				//console.log(typeof(data));
+				$scope.number=data;
+				
+  					if($scope.number=='0'){
+  						//console.log("00");
+						$('[class="alerts"]').hide();
+					}else{
+						//console.log("111");
+						$('[class="alerts"]').show();
+					}
+			});
+			
+			$http.get('data/start.php?type=Newnotice').success(function(data){ /*首页最新公告通知*/
+				$("#gg b").hide();
+				//console.log(data);
+				$scope.datat=data;
+			});
+			/*应用插件开发模块暂时隐藏*/
+			 $scope.plug=function(){//点击查看原因的功能
+				      $('.sms').html('应用插件模块正在开发中~~暂未开放！');
+				      $('.sms').css('display','block');
+				      $('.bgg').css('display','block');
+				      $(".sms").delay(2000).fadeOut("fast");
+				      $(".bgg").delay(2000).fadeOut("fast");
+				   }
+			/*数据分析开发模块暂时隐藏*/
+			 $scope.data=function(){//点击查看原因的功能
+				      $('.sms').html('数据分析模块正在开发中~~暂未开放！');
+				      $('.sms').css('display','block');
+				      $('.bgg').css('display','block');
+				      $(".sms").delay(2000).fadeOut("fast");
+				      $(".bgg").delay(2000).fadeOut("fast");
+				   }
+			/*首页刷新按钮*/
+			$scope.startRefresh=function(){
+				window.location.reload();
+			}
+			/*关注我们弹框*/
+			$scope.focusWe=function(){
+				zhuge.track('二维码点击', {
+					    weixin: $scope.username,//事件自定义属性
+					});
+				$(".focusWe").show();
+				$("body").css({"overflow-y":"hidden"});
+
+			}
+			/*关闭二维码弹框*/
+			$scope.closeFocus=function(){
+				$(".focusWe").hide();
+				$("body").css({"overflow-y":"auto"});
+				
+			}
+				/*点击新手教程的记录*/
+			var i = 0;
+			$scope.studyFocus=function(){
+				i++;
+				zhuge.track('新手教程', {
+						    weixin:$scope.username,//事件自定义属性
+						    '点击次数':i,
+							    
+					});
+			
+				
+			}
+			});
+		
+	/************************************TODO:upgradeCtrl*************************************************************/
+	app.controller('upgradeCtrl',function($scope,$http){
+			$http.get('data/upgrade.php?type=upgrade').success(function(data){//代理商基本信息
+				//console.log(data);
+				$scope.upgradedata = data;		
+			
+			});
+			$scope.currentIndex=0;//默认第一个有样式
+			$scope.noticeClick=function(index){
+				$scope.currentIndex = index; //保存当前点击的位置 即当前下标
+				$(".formParent .dengji").eq(index).show().siblings().hide();
+			}
+		});
+		/*****************************************TODO:申明help页面的控制器,帮助文档页面***************************/
+		app.controller('helpCtrl',function($scope){	
+			$(".top").click(function(){ /*返回顶部功能*/
+				$('body').animate({
+					scrollTop:0
+				},300);
+			})
+		});
+		/************************************TODO:确认收货页面suerGoodsCtrl*************************************************************/
+		app.controller('suerGoodsCtrl',function($scope,$http){
+			$http.get('data/suerGoods.php?type=suerGoods').success(function(data){
+				$scope.suerGoods = data;
+				//console.log($scope.suerGoods);
+				angular.forEach(data,function(item){
+					item.flag=true; //循环数据，给每一条数据默认设置为true 显示
+				});
+			});
+
+			$scope.suerGoodsBtn=function(index,data){ /*确认收货按钮事件*/
+				//console.log(index);
+				data.flag=false; //通过点击事件把当前数据的true改为false 隐藏状态
+				var aaa=$scope.suerGoods.every(function(item){
+					return item.flag===false; /*every方法,吧数据遍历，查询，如果所有的条件都为false时，那么最后会返回true*/
+				});
+				$scope.currIndex=index;
+				$scope.order_id=$scope.suerGoods[index].order_id;
+				$scope.order_gid=$scope.suerGoods[index].order_gid;
+				$scope.order_big=$scope.suerGoods[index].order_big;
+				$scope.order_small=$scope.suerGoods[index].order_small;
+				$scope.order_toagentid=$scope.suerGoods[index].order_toagentid;
+				//console.log($scope.id);
+				$http({
+					url:'data/suer.php?type=sure',
+					method:'GET',
+					params:({
+						"order_id":$scope.order_id,
+						"goods_id":$scope.order_gid,
+						"big":$scope.order_big,
+						"small":$scope.order_small,
+						"agent_id":$scope.order_toagentid
+					})
+				}).success(function(data){
+					//console.log(data);
+				});
+				//console.log(aaa);
+				if(aaa===true){ /*判断，当所有的消息都消失(false)时候，跳转页面*/
+					window.location.href="#/start";
+				}
+			};
+			$scope.cancelGoodsBtn=function(index,data){ /*取消收货按钮事件*/
+				//console.log(index);
+				data.flag=false; //通过点击事件把当前数据的true改为false 隐藏状态
+				var aaa=$scope.suerGoods.every(function(item){
+					return item.flag===false; /*every方法,吧数组查询，如果所有的条件都为false时，那么最后会返回true*/
+				});
+				$scope.currIndex=index;
+				$scope.order_agentid=$scope.suerGoods[index].order_agentid;
+				$scope.order_id=$scope.suerGoods[index].order_id;
+				$scope.order_gid=$scope.suerGoods[index].order_gid;
+				$scope.order_big=$scope.suerGoods[index].order_big;
+				$scope.order_small=$scope.suerGoods[index].order_small;
+				$scope.order_toagentid=$scope.suerGoods[index].order_toagentid;
+				//console.log($scope.id);
+				$http({
+					url:'data/suer.php?type=cancel',
+					method:'GET',
+					params:({
+						"order_id":$scope.order_id,
+						"goods_id":$scope.order_gid,
+						"big":$scope.order_big,
+						"small":$scope.order_small,
+						"agent_id":$scope.order_toagentid,
+						"order_agentid":$scope.order_agentid
+					})
+				}).success(function(data){
+					//console.log(data);
+				});
+				if(aaa===true){ /*判断，当所有的消息都消失(false)时候，跳转页面*/
+					window.location.href="#/start";
+				}
+			}
+		});
+		/*****************************TODO:申明zeroCtrl页面控制器,零售发货页面*************************************/
+		app.controller('zeroCtrl',function($scope,$http,$rootScope){
+			$(".placeholderLoad").show();
+			/*TODO:选择品牌功能*/
+			$http.get('data/sales.php?type=Sendout',{timeout:5000}).success(function(data){
+				$(".placeholderLoad").hide();
+				//console.log(data);
+				$scope.pinpaiData=data;
+				//TODO:绑定默认信息
+				$scope.activeArr=$scope.pinpaiData[0];//默认显示第一个品牌
+				$scope.activeVal=$scope.pinpaiData[0].goods[0].goods_name;//默认显示第一个内容
+				$scope.activeImg=$scope.pinpaiData[0].goods[0].goods_pic;//默认显示第一个内容的s图片
+				$scope.activeBig=$scope.activeArr.goods[0].big;//默认显示第一个品牌箱数
+				$scope.activeSmall=$scope.activeArr.goods[0].small//默认显示第一个商品盒数
+				//console.log($scope.activeVal);
+				$(function(){/*页面加载时候，默认读取第一条数据*/
+					//$scope.activeArr=$scope.pinpaiData[0];//切换品牌
+					$scope.shangping=$scope.pinpaiData[0].brand_name;
+					$scope.bid=$scope.pinpaiData[0].bid;
+
+					$scope.activeVal=$scope.activeArr.goods[0].goods_name;//切换内容
+					//console.log($scope.activeVal);
+					//$scope.activeImg=$scope.activeArr.goods[0].goods_pic;//切换图片
+					$scope.activeId=$scope.activeArr.goods[0].gid;//获取商品id
+					$scope.activeBig=$scope.activeArr.goods[0].big;//获取当前选中产品箱数
+					$scope.activeSmall=$scope.activeArr.goods[0].small;//获取当前选中产品盒数
+					$scope.activeSid=$scope.activeArr.goods[0].sid;//获取库存ID
+					$scope.currIndex=0; //默认第一个有样式
+				})
+				//TODO:品牌点击事件
+				$scope.currIndex=0; //默认第一个有样式
+				$scope.oneClick=function(index){
+					$scope.choseIndex=-1;
+					$scope.activeVal=null;//切换品牌的时候内容清空
+					$('[id="sendCount"]').val("");//输入框文本清空		
+					$scope.activeBig=0;
+					$scope.activeSmall=0;
+					$scope.currIndex=index; //保存当前被点击的li
+					$scope.activeArr=$scope.pinpaiData[index];//切换品牌
+					$scope.shangping=$scope.pinpaiData[index].brand_name;
+					$scope.bid=$scope.pinpaiData[index].bid;
+					$(".product ul").eq(index).show().siblings().hide();//切换品牌，显示当前对应的内容
+				};
+				//TODO:内容点击事件
+				$scope.choseIndex=0; //默认第一个有样式
+				$scope.twoClick=function(index){
+					$scope.choseIndex=index;//保存当前被点击的li
+					$('[id="sendCount"]').val("");//输入框文本清空
+					$scope.activeVal=$scope.activeArr.goods[index].goods_name;//切换内容
+					$scope.activeImg=$scope.activeArr.goods[index].goods_pic;//切换图片
+					$scope.activeId=$scope.activeArr.goods[index].gid;//获取商品id
+					$scope.activeBig=$scope.activeArr.goods[index].big;//获取当前选中产品箱数
+					$scope.activeSmall=$scope.activeArr.goods[index].small;//获取当前选中产品盒数
+					$scope.activeSid=$scope.activeArr.goods[index].sid;//获取库存ID
+					$(".he").attr("disabled", false).css({"background":"#5BC0DE"});/*合并按钮激活*/
+					$(".cha").attr("disabled", false).css({"background":"#5BC0DE"});/*拆分按钮激活*/
+				}
+				/*库存拆分*/
+				$scope.cha=function(){ /*箱拆为盒*/
+					$('[id="sendCount"]').val("");
+					$scope.activeSmall=parseFloat($scope.activeSmall);
+					//console.log();
+					if($scope.activeBig>0){ /*如果箱的数量大于0，可以进行箱拆分盒,否则箱数量=0时退出函数*/
+						$scope.everyChaBig=$scope.activeBig--;
+						$scope.everyChaSmall=$scope.activeSmall+=20;
+						$(".he").attr("disabled", false).css({"background":"#5BC0DE"});/*合并按钮激活*/
+						/*拆分按钮提交数据*/
+						$http({
+							url:'data/store.php?type=cha',
+							method:'GET',
+							params:({
+								"sid":$scope.activeSid,//库存ID
+								"activeBid":$scope.bid,//品牌ID
+								"activeGid":$scope.activeId,//商品ID
+								"everyChaBig":$scope.everyChaBig-1,
+								"everyChaSmall":$scope.everyChaSmall
+							})
+						}).success(function(data){
+							//console.log(data);
+						})
+					}else{
+						$(".cha").attr("disabled", true).css({"background":"#ccc","border":"none"});/*拆分按钮禁用*/
+						return;
+					}
+				};
+				/*库存合并*/
+				$scope.he=function(){ /*如果盒的数数量大于6，可以进行盒合并为箱，否则盒数量<6时退出函数*/
+					$('[id="sendCount"]').val("");
+					if($scope.activeSmall>=20){
+						$scope.everyHeBig=$scope.activeBig++;
+						console.log($scope.activeSmall);
+						$scope.everyHeSmall=$scope.activeSmall-=20;
+						$(".cha").attr("disabled", false).css({"background":"#5BC0DE"});/*拆分按钮激活*/
+						/*合并按钮提交数据 */
+						$http({
+							url:'data/store.php?type=he',
+							method:'GET',
+							params:({
+								"sid":$scope.activeSid,//库存ID
+								"activeBid":$scope.bid,//品牌ID
+								"activeGid":$scope.activeId,//商品ID
+								"everyHeBig":$scope.everyHeBig+1,
+								"everyHeSmall":$scope.everyHeSmall
+							})
+						}).success(function(data){
+							//console.log(data);
+						})
+					}else{
+						$(".he").attr("disabled", true).css({"background":"#ccc","border":"none"});/*合并按钮禁用*/
+						return;
+					}
+				};
+				/*发货盒数量 的加减功能*/
+				$scope.sendCount="";
+				$scope.addCount=function(){
+					if($scope.sendCount<$scope.activeSmall&&$scope.activeSmall>0){ /*发货数量小于库存且库存大于0才能加*/
+						$scope.sendCount++;
+					}else{
+						//alert("只能发" +$scope.activeSmall+ "盒,请拆分箱数之后再发货!");
+						showMessage("只能发" +$scope.activeSmall+ "盒,请拆分箱数之后再发货!",'sendCount');
+						return;
+					}
+				};
+				$scope.deleCount=function(){
+					if($scope.sendCount <=0){
+						return;
+					}else{
+						$scope.sendCount--;
+					}
+				};
+				$scope.ff=function(){ /*获取焦点事件*/
+					if($("#sendCount").val()=='0'){
+						$("#sendCount").val('');
+					}
+				};
+				/*鼠标弹起 判断用户输入盒数是否大于库存*/
+				$scope.sendCount="";
+				$('[id="sendCount"]').keyup(function(){
+					$scope.activeSmall=parseInt($scope.activeSmall);
+					if($scope.activeVal==null){ /*未选择商品 ，提示用户*/
+						//alert("请选择商品分类");
+						showMessage("请选择商品分类",'sendCount');
+						$('[id="sendCount"]').val('');
+						this.value=this.value.replace(/[^1-9]/g,'');
+					}else if(this.value==0){ /*输入为0 ，提示用户*/
+						//alert("发货盒数最少1盒");
+						this.value=this.value.replace(/[^1-9]/g,'');
+					}else if($scope.sendCount>$scope.activeSmall){
+						//alert("盒数库存不足,请去拆分箱数!");
+						showMessage("盒数库存不足，请先拆分！",'sendCount');
+						$('[id="sendCount"]').val($scope.activeSmall);
+						$scope.sendCount=$scope.activeSmall;
+						
+					}
+				});
+			}).error(function(data,status){ //错误处理				
+					//alert("加载超时");
+				showRefresh();
+			});//ajax结束
+			/*零售页面提交发货按钮*/
+			$scope.sendZero=function(){
+				$scope.heshu=$('[id="sendCount"]').val();
+				//console.log();
+				if($scope.heshu=="0"){
+					//alert("请输入盒数");
+					showMessage("请输入盒数");
+				}else{
+					$http({
+					url:'data/sendgoods.php?type=resale',
+					method:'GET',
+					params:({
+						"gid":$scope.activeId,
+						"bid":$scope.bid,
+						"pinp":$scope.shangping,
+						"goods":$scope.activeVal,
+						"small":$scope.heshu
+					})
+				}).success(function(data){
+					//console.log(data);
+					if(data==1){
+						//alert("零售发货成功！");
+						showMessage("零售发货成功！");
+						window.history.back(-1);
+					}else if(data==2){
+						//alert("零售发货失败！");
+						showMessage("零售发货失败！");
+					}else if(data==3){
+						//alert("亲，请输入发货数量！");
+						showMessage("亲，请输入发货数量！",'sendCount');
+					}
+				});
+				}
+			}
+		});
+		/*******************************TODO:申明sales页面控制器,销售管理页面*********************************/
+		app.controller('salesCtrl',function($scope,$http,$rootScope){
+			$scope.hasMore=true;
+			$(".placeholderLoad").show();
+			$http.get('data/sales.php?type=sales',{timeout:5000}).success(function(data){
+				console.log(data);
+				$scope.dishList=data;
+				$(".placeholderLoad").hide();
+			}).error(function(data,status){ //错误处理	
+					//alert("加载超时");
+					showRefresh();
+			});
+			//加载更多按钮
+			$scope.loadMore=function(){
+				if($scope.loading||!$scope.hasMore) return;//防止重复查询，每次上拉只执行一次查询请求
+				$scope.loading=true;
+				$http.get('data/sales.php?type=sales&start='+$scope.dishList.length).success(function(data){
+					$scope.loading=false;
+					$scope.dishList=$scope.dishList.concat(data);
+					if(data.length<5){
+						$scope.hasMore=false;
+					}
+				})
+			};
+			/*点击弹出交易记录*/
+			$scope.salesActive=function(){
+				$(".salesUl").show();
+			}
+			$scope.salesLeave=function(){
+  			 $(".salesUl").hide();
+			}
+			/*代理发货功能 模态框*/
+			$(".daili").click(function(){
+				$("#modal").show();//遮罩层的显示
+				$("#mod").slideDown(100);//弹出框的显示
+				$(".navbar-fixed-bottom").hide();//脚部导航隐藏
+			});
+			/*关闭代理发货*/
+			$("#mod button[class='close']").click(function(){
+				$("#modal").hide();
+				$("#mod").hide(100);
+				$(".navbar-fixed-bottom").show();//脚部导航显示
+			})
+			/*TODO:选择品牌功能*/
+			$http.get('data/sales.php?type=Sendout').success(function(data){
+				//console.log(data);
+				$scope.pinpaiData=data;
+				//TODO:绑定默认信息
+				$scope.activeArr=$scope.pinpaiData[0];//默认显示第一个品牌
+				$scope.activeVal=$scope.pinpaiData[0].goods[0].goods_name;//默认显示第一个内容
+				$scope.activeImg=$scope.pinpaiData[0].goods[0].goods_pic;//默认显示第一个内容的s图片
+				//console.log($scope.activeVal);
+				//TODO:品牌点击事件
+				$scope.currIndex=0; //默认第一个有样式
+				$scope.oneClick=function(index){
+					$scope.choseIndex=-1;//选中品牌的时候把内容的初始样式 屏蔽
+					$scope.activeVal=null;//内容清空
+					$rootScope.activeBig=0;
+					$rootScope.activeSmall=0;
+					$scope.currIndex=index; //保存当前被点击的li
+					$(".product_box li").removeClass("activeClass").addClass("defaultClass");
+					$scope.activeArr=$scope.pinpaiData[index];//切换品牌
+					$(".product ul").eq(index).show().siblings().hide();//切换品牌，显示当前对应的内容
+					$(".item .UL2").eq(index).slideToggle().siblings().hide();/*数据分析页面的二级菜单功能*/
+				};
+				//TODO:内容点击事件
+				$scope.choseIndex=0; //默认第一个有样式
+				$scope.twoClick=function(index){
+					$scope.choseIndex=index;//保存当前被点击的li
+					$scope.activeVal=$scope.activeArr.goods[index].goods_name;//切换内容
+					//console.log($scope.activeVal);
+					$scope.activeImg=$scope.activeArr.goods[index].goods_pic;//切换图片
+					$rootScope.img2=$scope.activeImg;
+					$rootScope.activeBid=$scope.activeArr.bid;//获取品牌id
+					$rootScope.activeGid=$scope.activeArr.goods[index].gid;//获取商品id
+					$scope.activeBig=$scope.activeArr.goods[index].big;//获取当前选中产品箱数
+					$rootScope.activeBig=$scope.activeBig;
+					$scope.activeSmall=$scope.activeArr.goods[index].small;//获取当前选中产品盒数
+					$rootScope.activeSmall=$scope.activeSmall;
+					$rootScope.activeSid=$scope.activeArr.goods[index].sid; //库存ID
+				}
+			});
+
+			/****************TODO:确认订单页面***************/
+			/*库存拆分*/
+			$scope.cha=function(){
+				$('[name="big"]').val("");
+				$('[name="small"]').val("");
+				var activeSmall=parseFloat($rootScope.activeSmall);
+				$rootScope.activeSmall=activeSmall; //把数据转换成数字格式
+				if($rootScope.activeBig>0){ /*如果箱的数量大于0，可以进行箱拆分盒,否则箱数量=0时退出函数*/
+					$scope.everyChaBig=$rootScope.activeBig--;
+					$scope.everyChaSmall=$rootScope.activeSmall+=30;
+					$(".he").attr("disabled", false).css({"background":"#5BC0DE"});/*合并按钮激活*/
+					/*提交每次的数据*/
+					$http({
+						url:'data/store.php?type=cha',
+						method:'GET',
+						params:({
+							"sid":$rootScope.activeSid,//库存ID
+							"activeBid":$rootScope.activeBid,//品牌ID
+							"activeGid":$rootScope.activeGid,//商品ID
+							"everyChaBig":$scope.everyChaBig-1,
+							"everyChaSmall":$scope.everyChaSmall
+						})
+					}).success(function(data){
+						//console.log(data);
+					})
+				}else{
+					$(".cha").attr("disabled", true).css({"background":"#ccc","border":"none"});/*拆分按钮禁用*/
+					return;
+				}
+			};
+			/*库存合并*/
+			$scope.he=function(){ /*如果盒的数数量大于6，可以进行盒合并为箱，否则盒数量<6时退出函数*/
+				$('[name="big"]').val("");
+				$('[name="small"]').val("");
+				if($rootScope.activeSmall>=20){
+					$scope.everyHeBig=$rootScope.activeBig++;
+					$scope.everyHeSmall=$rootScope.activeSmall-=20;
+					$(".cha").attr("disabled", false).css({"background":"#5BC0DE"});/*拆分按钮激活*/
+					/*提交每次点击的数据*/
+					$http({
+						url:'data/store.php?type=he',
+						method:'GET',
+						params:({
+							"sid":$rootScope.activeSid,//库存ID
+							"activeBid":$rootScope.activeBid,//品牌ID
+							"activeGid":$rootScope.activeGid,//商品ID
+							"everyHeBig":$scope.everyHeBig+1,
+							"everyHeSmall":$scope.everyHeSmall
+						})
+					}).success(function(data){
+						//console.log(data);
+					})
+				}else{
+					$(".he").attr("disabled", true).css({"background":"#ccc","border":"none"});/*合并按钮禁用*/
+					return;
+				}
+			};
+			/*发货箱数量的加减功能*/
+			$scope.sendBox="";//定义箱数初始化
+			$scope.addBox=function(){ //发货箱数添加功能
+				if($scope.sendBox<$scope.activeBig&&$scope.activeBig>0){ /*发货箱数小于库存且库存大于0才能加*/
+					$scope.sendBox++;
+				}else{
+					//alert("库存不足,只能发" +$scope.activeBig+ "箱!");
+					showMessage("库存不足,只能发" +$scope.activeBig+ "箱!");
+					return;
+				};
+
+			};
+			$scope.deleBox=function(){ //减少发货箱数功能
+				if($scope.sendBox<=0){
+					return;
+				}else{
+					$scope.sendBox--;
+				}
+			};
+			/*发货盒数量 的加减功能*/
+			$scope.sendCount="";
+			$scope.addCount=function(){
+				if($scope.sendCount<$scope.activeSmall&&$scope.activeSmall>0){ /*发货数量小于库存且库存大于0才能添加*/
+					$scope.sendCount++;
+				}else{
+					showMessage("只能发" +$scope.activeSmall+ "盒,请拆分箱数之后再发货!");
+					return;
+				}
+			};
+			$scope.deleCount=function(){
+				if($scope.sendCount <=0){
+					return;
+				}else{
+					$scope.sendCount--;
+				}
+			};
+			$scope.ffBig=function(){ /*获取焦点事件*/
+				console.log($("#dlSmall").val());
+				if($("#dlSmall").val()=='0'){
+					$("#dlSmall").val('');
+				}
+			};
+			$scope.ffSmall=function(){ /*获取焦点事件*/
+				if($("#smallBox").val()=='0'){
+					$("#smallBox").val('');
+				}
+			};
+			/*鼠标弹起 判断用户输入箱数是否大于库存*/
+			$("[name='big']").keyup(function(){
+				$scope.activeBig=parseInt($scope.activeBig);
+				if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')};
+				if($scope.sendBox>$scope.activeBig||$scope.sendBox<0){/*输入箱数与库存对比*/
+					//$("[name='big']").val($scope.activeBig);
+					$scope.sendBox=$scope.activeBig;
+					showMessage("库存不足,只能发" +$scope.activeBig+ "箱!");
+				}
+			});
+			/*鼠标弹起 判断用户输入盒数是否大于库存*/
+			$("[name='small']").keyup(function(){
+				$scope.activeSmall=parseInt($scope.activeSmall);
+				if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')};
+				if($scope.sendCount>$scope.activeSmall||$scope.sendCount<0){
+					//$("[name='small']").val($scope.activeSmall);
+					$scope.sendCount=$scope.activeSmall;
+					showMessage("只能发" +$scope.activeSmall+ "盒,请拆分箱数之后再发货!");
+				}
+			});
+			/*选择代理 弹出模态框*/
+			$scope.showDailiModl=function(){
+				$(".daiLiMod,.daiLiContent").show();
+			};
+			/*选择代理功能*/
+			$http.get('data/xiajidaili.php?type=xiaji&bid='+$rootScope.activeBid).success(function(data){
+				//$scope.data=data;
+				/*选择代理功能*/		
+				if(data.length==0){	
+				$("#dlTxt").show();
+				}else{
+					$("#dlTxt").hide();
+				}
+				$scope.selectDailiData=data;
+				//console.log($scope.selectDailiData);
+				$scope.selectDaili=function(index){
+					$scope.currIndex=index;
+					$rootScope.dailiName=$scope.selectDailiData[index].name;
+					$scope.dailiDengji=$scope.selectDailiData[index].dengjiname;
+					$rootScope.dailiID=$scope.selectDailiData[index].id;
+					$(".next_daili i").text($scope.dailiName+'('+$scope.dailiDengji+')'); //替换文本
+					$(".daiLiMod").hide();
+				}
+				/***********ajax表单提交 发货*************/
+				$(".send").click(function(){
+					var B=$('[name="big"]').val();
+					var S=$('[name="small"]').val();
+					var DL=$('[class="DL"]').text();
+					var ID=$rootScope.dailiID;
+					var bid=$rootScope.activeBid;
+					var gid=$rootScope.activeGid;
+					//console.log(ID);
+					if(B=="0"&&S=="0"){
+						//alert("请输入数量");
+						showMessage("请输入数量");
+					}else if(DL=="请选择代理"){
+						//alert("请选择代理");
+						showMessage("请选择代理");
+					}else{
+						$.post('data/sendgoods.php?type=send',{'big':B,'small':S,'DL':DL,'id':ID,'bid':bid,'gid':gid},function(data){
+						//console.log(data);
+						if(data=='1'){
+							//alert("发货成功！");
+							showMessage("发货成功！");
+							window.history.back(-1);
+						}else{
+							//alert("发货失败！请输入数量!");
+							showMessage("发货失败！请输入数量!",'dlSmall');
+						}
+					})
+					}
+					
+				})
+				//关闭选择代理按钮
+				$scope.colseDailiBtn=function(){
+					$(".daiLiMod").hide();
+					$(".next_daili i").text("请选择代理");//替换文本
+				}
+			})
+
+		});
+		/******************************************TODO:查看销售记录页面*****************************************/
+		app.controller('salesRecordCtrl',function($scope,$http){
+			$(".placeholderLoad").show();
+			$scope.hasMore=true;
+			$http.get('data/order.php?type=agentSend',{timeout:5000}).success(function(data){ /*代理记录数据*/
+				$(".placeholderLoad").hide();
+				console.log(data);
+				$scope.agentData=data;
+			}).error(function(){
+				showRefresh()
+			});
+			$scope.loadMores=function(){ //代理加载更多按钮
+				if($scope.loading||!$scope.hasMore) return;//防止重复查询，每次上拉只执行一次查询请求
+				$scope.loading=true;
+				$http.get('data/order.php?type=agentSend&starts='+$scope.agentData.length).success(function(data){
+					//console.log($scope.agentData.length);
+					$scope.loading=false;
+					$scope.agentData=$scope.agentData.concat(data);
+					if(data.length<5){
+						$scope.hasMore=false;
+					}
+				})
+			};/*代理加载更多结束*/
+			$(".choose li").click(function(){ /*按钮选择 加载内容*/
+				//console.log(this);
+				/*按钮切换样式*/
+				$(this).addClass('activeClass').siblings().removeClass('activeClass').addClass('defaultClass');
+				if($(this).html()=="代理发货"){
+					$(".record>div:first").show();
+					$(".record>div:last").hide();
+				}else if($(this).html()=="零售发货"){
+					$http.get('data/order.php?type=resale',{timeout:5000}).success(function(data){ /*零售记录数据*/
+						//console.log(data);
+						$scope.resaledata=data;
+					}).error(function(){
+						showRefresh();
+					});
+					$scope.loadMore=function(){ //零售加载更多按钮
+						$scope.loading=true;
+						$http.get('data/order.php?type=resale&start='+$scope.resaledata.length).success(function(data){
+							//console.log($scope.resaledata.length);
+							$scope.loading=false;
+							$scope.resaledata=$scope.resaledata.concat(data);
+							if(data.length<5){
+								$scope.hasMore=false;
+							}
+						})
+					};/*零售加载更多结束*/
+					$(".record>div:last").show();
+					$(".record>div:first").hide();
+				}
+			})/*点击事件结束*/
+
+		});
+		/*****************************TODO:申明gives页面控制器,授权证书页面*************************************/
+		app.controller('givesCtrl',function($scope,$http,$routeParams,$rootScope){
+			$(".placeholderLoad").show();
+			$http.get('data/gives.php?type=gives',{timeout:5000}).success(function(data){
+				$(".placeholderLoad").hide();
+				$scope.data=data;
+			}).error(function(){
+				showRefresh();
+			});
+			//console.log($routeParams.names);
+			$scope.currentIndex=0;//默认第一个有样式
+			$scope.chooseLiClick=function(index){
+				$scope.currentIndex = index; //保存当前点击的位置 即当前下标
+				//$scope.isActive=true;
+				$(".img_box ").eq(index).show().siblings().hide();
+			}
+			//console.log($rootScope.names);//打印接收到的参数
+		});		
+		/*****************************************TODO:申明management控制器,下线管理页面********************************/
+		app.controller('next_managementCtrl',function($scope,$http){
+			$(".placeholderLoad").show();
+			$http.get('data/next_management.php?type=management',{timeout:5000}).success(function(data){
+				$(".placeholderLoad").hide();
+				//console.log(data);
+				$scope.data=data;
+			}).error(function(){
+				showRefresh();
+			});
+			$scope.currentIndex=0;//默认第一个有样式
+			$scope.mmClick=function(index){ /*选择品牌*/
+				$scope.currentIndex = index;
+				$(".mmList>div ").eq(index).show().siblings().hide();
+			};			
+		});
+		/***********************************TODO:申明personal控制器,个人中心页面*****************************************/
+		app.controller('personalCtrl',function($scope,$http){
+			/*2016-11-11增加功能*/
+			$(".placeholderLoad").show();
+			$http.get('data/personal.php?type=personal',{timeout:5000}).success(function(data){
+				// console.log(data);
+				if(data==0){
+					$('[id= "kuncun"]').hide();
+				}else{
+					$('[id= "kuncun"]').show();
+				}
+			}).error(function(){
+				showRefresh();
+			});
+			$http.get('data/personal.php?type=name').success(function(data){
+				//console.log(data);
+				$scope.name=data.name;
+				$scope.weixin=data.weixin;
+				$scope.personalId=data.id;
+				//console.log($scope.personalId);
+				$http.get('data/personal.php?type=break').success(function(data){
+					$(".placeholderLoad").hide();
+					//console.log(data);
+					/*脱离团队*/
+					if(data==0){/*可以脱离状态*/
+						$scope.moveTeam=function(){
+							$("#myModal").modal('hide');
+							$('[data-target="#myModal"]').css({"background":"#888","border":"#888"}).text("已脱离")
+							$('[data-target="#myModal"]').attr("disabled", true);
+							//console.log($scope.personalId);
+							$http.get('data/personal.php?type=breakaway&personalId='+$scope.personalId).success(function(data){
+								//console.log($scope.is_show);
+								console.log(data);
+							})
+						}
+					}else{ /*已脱离状态*/
+						$('[data-target="#myModal"]').css({"background":"#888","border":"#888"}).text("已脱离")
+						$('[data-target="#myModal"]').attr("disabled", true);
+					}
+				})
+			})
+		});
+		/**********************************TODO:申明personalDetail控制器,个人详细页面**********************************/
+		app.controller('personalDetailCtrl',function($scope,$http){
+			$(".placeholderLoad").show();
+			$http.get('data/personal.php?type=name',{timeout:5000}).success(function(data){
+				$scope.name=data.name;
+				$scope.id=data.id;
+				//$scope.idcard=data[0].idcard;
+				//console.log($scope.id);
+				$scope.weixin=data.weixin;
+				$scope.phone=data.phone;			
+				$(".placeholderLoad").hide();
+			}).error(function(){
+				showRefresh();
+			})
+			$(function(){	
+			$("#submit").click(function(){
+				var name =  $('#name').val();
+				//console.log(name);
+				var username =  $('#username').val();
+
+				var password=  $('#password').val();
+
+				var repassword =  $('#repassword').val();
+				//console.log(username);
+				var phone =  $('#phone').val();
+
+				if(password!= repassword){
+					showMessage('两次密码不一样，请重新输入！','password');
+						return false;
+					}
+					$.post('data/form.php?type=changepassword',{'name':name,'username':username,'password':password,'repassword':repassword,'phone':phone},function(data){
+						//console.log(data);
+
+						if(data==1){
+
+			         		showMessage('修改名字成功','name');
+			         		 
+			        	}
+			        	if(data==2){
+
+			        		showMessage('修改密码成功！','password');
+
+			        	}
+			        	
+					
+
+					});
+
+				});
+			});
+		});
+
+		/**********************************TODO:申明personalNewKc控制器，新建库存页面*********************************/
+		app.controller('personalNewKcCtrl',function($scope,$http,$rootScope){
+			$http.get('data/personalNewKc.php?type=personalNewKc').success(function(data){
+				//console.log(data);
+				$scope.data=data;
+				/*提交商品 品牌数据*/
+				$scope.shangpin="";
+				$scope.shangpin=$scope.data.shangpin;
+				$scope.choosePS=function(){ /*通过事件，获取select选中值*/
+					//console.log($scope.pinpai.brand_name);
+					var goods_name=$scope.shangpin;
+					//console.log(goods_name);
+					$http.get('data/query.php?type=goods_store&goods_name='+goods_name).success(function(data){
+						//console.log(data);
+						$rootScope.dataBig=data.big;
+						$rootScope.dataSmall=data.small;
+						//console.log($scope.dataBig);
+					})
+				};
+				$scope.shangpin="";//定义空的商品数据 ng-model="shangpin"
+				$scope.shangpin=$scope.data.shangpin; //商品内容 赋值
+				$(".addKc").click(function(){
+					var chooseP=$scope.pinpai.brand_name; //获取品牌内容
+					var chooseS=$scope.shangpin;       //获取商品内容
+					//console.log(chooseS);
+					//var chooseS=$scope.pinpai.bid;       //获取品牌id
+					var addBox=$('[id="addBox"]').val();
+					var addCount=$('[id="addCount"]').val();
+					$.post('data/ajax.php?type=newaddkc',{'brand_name':chooseP,'goodsName':chooseS,'bigbox':addBox,'smallbox':addCount},function(data){
+						//console.log(data);
+						if(data==1){
+							//alert("新建库存成功！");
+							showMessage("新建库存成功！");
+							//window.history.back(-1);
+							 location.reload() 
+						}else if(data==2){
+							//alert("新建库存失败!");
+							showMessage("新建库存失败!");
+							//window.history.back(-1);
+						}else if(data==3){
+							//alert("数量不能为空！请输入您的库存数量！");
+							showMessage("数量不能为空！请输入您的库存数量！");
+						}
+					})/*提交数据结束*/
+				});/*点击事件结束*/
+			});/*获取数据结束*/
+		});
+		
+		/******************************TODO:申明pinpaiCtrl控制器，品牌申请页面*************************************/
+		app.controller('pinpaiCtrl',function($scope,$http,$rootScope){
+			$(".placeholderLoad").show();
+			$http.get('data/mypinpai.php?type=mypinpai',{timeout:5000}).success(function(data){
+				$(".placeholderLoad").hide();
+				//console.log(data);
+				$scope.data=data;
+			}).error(function(){
+				showRefresh();
+			});
+		});
+
+		/************************************TODO:申明inviter控制器,下线邀请页面************************/
+		app.controller('inviterCtrl',function($scope,$http){
+			$(".placeholderLoad").show();
+			$http.get('data/next_inviter.php?type=next_inviter',{timeout:5000}).success(function(data){
+				$(".placeholderLoad").hide();
+				//console.log(data)
+				$scope.pinpaiData=data;
+				$scope.currentIndex=0; //下标初始化为0 第一个默认有样式
+				$scope.erweimaClick=function(index){
+					$scope.currentIndex=index; //保存当前被点击的li下标
+					//console.log($scope.pinpaiData[index]);
+					$(".erweima div ").eq(index).show().siblings().hide();
+				}
+			}).error(function(){
+				showRefresh();
+			});
+
+		});
+		/*******************************TODO:下级管理页面*************************************************************/
+		/******************************TODO:后台经销商页面***********************************************************/
+		app.controller('shangAdminCtrl',function($scope,$location,$http){
+			$(".placeholderLoad").show();
+			var shangAdminUrl1=$location.url().split("?")[1].split("=")[0];//获取页面路径
+			var shangAdminUrl2=$location.url().split("?")[1].split("=")[1];//获取页面路径
+			var shangAdminUrl3=$location.url().split("&")[1].split("=")[0];//获取页面路径
+			var shangAdminUrl4=$location.url().split("&")[1].split("=")[1];//获取页面路径
+			// console.log(shangAdminUrl3);
+			// console.log(shangAdminUrl4);
+			$scope.url1=shangAdminUrl1;
+			$scope.url2=decodeURIComponent(shangAdminUrl2);
+			$scope.url3=shangAdminUrl3;
+			$scope.url4=shangAdminUrl4;
+			$http.get('data/shangAdmin.php?'+$scope.url1+'='+$scope.url2+'&'+$scope.url3+'='+$scope.url4,{timeout:5000}).success(function(data){
+				$(".placeholderLoad").hide();
+				//console.log(data);
+				$scope.data=data;
+			}).error(function(){
+				showRefresh();
+			})
+
+		});
+		
+		/**************************************TODO:申明logiCtrl控制器，登录页面***************************************/
+		app.controller('loginCtrl',function($scope,$location,$http){
+			$http.get('data/cookie.php').success(function(data){
+				//console.log(data);
+				$scope.username = data.username;
+				$scope.password = data.password;
+				//console.log($scope.username);
+			})
+		$(function(){
+			$("#item1").blur(function(){
+				//var objReg=/^[u4E00-u9FA5]+$/; 
+				var objReg=/^[^\u4e00-\u9fa5|\s]{0,}$/;
+				var username =  $('#item1').val();
+				if(username==''){
+					showMessage('登录名不能为空！','item1');
+				}else if(!objReg.test(username)){
+				//alert("不能输入中文");
+					showMessage('不能输入中文和空格！','item1');
+					$('#item1').val('');
+				}
+			})
+		})
+
+		/*登陆功能*/
+		$("#submit").click(function(){
+
+				var username =  $('#item1').val();
+				var password =  $('#item2').val();
+				var brand_id =  $('#brand_id').val();
+			
+				$.ajax({
+					type: "post",  //以post方式与后台沟通
+					url :'data/login.php?act=adminlogin',
+					data:{'username':username,'password':password,'brand_id':brand_id},
+					success:function(data){
+						
+						var data = eval("("+data+")");
+						 //$scope.data = data;
+						// console.log(data);
+
+					if(data==0){
+		         		showMessage('代理商帐号或密码错误,请重新输入!','item1');
+		        	}
+		        	if(data==1){
+		        		showMessage('对不起，你已被加入黑名单，无法登录，请联系管理员或上级代理','item1');
+		        	}
+		        	if(data==2){
+		        		showMessage('对不起，您的帐号已过期，无法登录，请联系管理员或上级代理','item1');
+		        	}
+		        	 if(data.error==4){
+		        		window.location.href="#/shenq?brand_id="+brand_id;
+		        		 zhuge.identify(data.id,{
+	                     name:data.name,   //预定义属性
+	                     weixin:data.weixin,
+	                   	'等级': data.dengji ,   //自定义属性
+                 		}, function(){
+                        // alert($scope.password+'33');
+                       window.location.href="#/shenq?brand_id="+brand_id;//执行用户标识成功后的代码,比如跳转页面
+                    });
+		        	}
+
+		        	if(data.error==3){
+		       		//window.location.href="#/start";
+		       		 zhuge.identify(data.id,{
+                     name:data.name,   //预定义属性
+                     weixin:data.weixin,
+                   	'等级': data.dengji ,   //自定义属性
+                 		}, function(){
+                        // alert($scope.password+'33');
+                        window.location.href="#/start";//执行用户标识成功后的代码,比如跳转页面
+                    });
+
+   				
+				}
+
+				}
+
+			});
+		});
+
+		$("#section_container").hide;		
+		setTimeout(function(){
+				$(".loaderBox").hide();
+				$("#section_container").show();
+		},1000)//强制显示loading 启动页面
+		var loginUrl=$location.url().split("=")[1];//获取页面路径
+		$scope.loginUrl=loginUrl;
+		if(!$scope.loginUrl){return}; 
+		$http.get('data/login.php?brand_id='+$scope.loginUrl).success(function(data){
+				//console.log(data);
+				//$scope.data=data;
+			})
+		});				
+			/*************************************TODO:找回密码页面***************************************************/
+		app.controller('forgetCtrl',function($scope,$http){
+			$('#phone').blur(function(){//查询该手机号是否是代理商注册的
+				var phone = $('#phone').val();
+				//console.log(phone);
+				
+			})
+			var wait=60;//发送验证码一分钟倒计时函数功能
+			function time(){
+				if (wait == 0) {
+					$('#send').removeAttr("disabled");
+					$('#send').val("获取验证码");
+					wait = 60;
+				} else {
+					$('#send').attr("disabled", true);
+					$('#send').val("重新发送(" + wait + ")");
+					wait--;
+					var timer=setTimeout(function(){
+						time();
+					},1000)
+				clearInterval(timer);//清除倒计时!
+				}
+			}
+			$('#send').click(function(){
+				var reg = /^1[3|4|5|8][0-9]\d{4,8}$/;
+				var phone = $('#phone').val();
+				if(phone==''){
+					showMessage('手机号不能为空!','phone');
+					return false;
+				}else if(!reg.test(phone)){
+					showMessage('请输入正确手机号码格式!','phone');
+					$('#phone').val('');
+					return false;
+				}
+				$.ajax({
+					tyep:'post',
+					url:"data/forget.php?type=phone",
+					data:{'phone':phone},
+					success: function(data){
+						//console.log(data);
+						if(data == 2){
+							showMessage('该手机号不是您注册时的号码!','phone');
+							// $('#phone').val('');
+								return false;
+								
+						}else{
+							time();
+							$.ajax({
+								tyep:'post',
+								url:"data/forget.php?type=code",
+								data:{'phone':phone},
+								success: function(data){
+									//console.log(data);
+								$('#code1').val(data);	
+								
+								}
+							})
+
+						}
+					
+					}
+				})
+				
+			})//发送验证码验证功能结束
+
+		 $scope.reg=function(){
+				    var phone = $('#phone').val();
+				    	//console.log(phone);
+					var code = $('#code').val();
+					var code1 = $('#code1').val();
+
+					var pwd = $('#pwd').val();
+					
+					if(phone == ''){
+						showMessage('手机号不能为空!','phone');
+						
+						return false;
+					}
+					if(code == ''){
+						showMessage('请输入验证码!','code');
+						
+						return false;
+					}
+					if(code != code1){
+						showMessage('验证码错误!','code');
+						
+						return false;
+					}
+					if(pwd == ''){
+							showMessage('请填写新密码!','pwd');
+						
+						return false;
+					}
+
+					$.post('data/forget.php?type=verification',{'phone':phone,'password':pwd},function(data){
+
+						//console.log(data);
+							if(data == 1){
+
+								showMessage('重设密码成功!','pwd');
+								setTimeout(function(){
+									window.location.href='#/login';
+								},2000)
+								
+							}else if(data == 2){
+								showMessage('重设密码失败!','pwd');
+							}
+
+
+						})
+
+			}
+
+			/*****联系我们功能****/
+			$scope.contact=function(){
+				var form1=document.getElementsByTagName("form")[0];
+				var form2=document.getElementsByTagName("form")[1];
+				var forgetPw=document.getElementsByClassName("forgetPw")[0];
+				var title=document.getElementsByClassName("title")[0];
+				form1.style.display="none";
+				form2.style.display="block";
+				forgetPw.style.display="none";
+				title.innerHTML="联系我们";
+			}
+		});
+		/******************************TODO:已有账号登录，申请品牌页面*****************************************************/
+		app.controller('shenqCtrl',function($scope,$location,$http){
+			var loginUrl=$location.url().split("=")[1];//获取页面路径
+			$scope.loginUrl=loginUrl;
+			$scope.brand_id=decodeURIComponent(loginUrl);
+			//console.log($scope.brand_name);
+			$http.get('data/shenq.php?brand_id='+$scope.brand_id).success(function(data){
+				//console.log(data);
+				$scope.bid=data.bid;
+				$scope.brand_name=data.brand_name;
+				//console.log($scope.bid);
+			})
+		});
+		/************************************TODO:申明noticeCtrl控制器，发布公告页面*************************************/
+		app.controller('noticeCtrl',function($scope,$http,$location){
+			$(".placeholderLoad").show();
+			$http.get('data/notice.php?type=notice',{timeout:5000}).success(function(data){
+				//console.log(data);
+				$scope.noticeData=data;
+				$(".placeholderLoad").hide();
+				var noticeUrl=$location.url().split("=")[1];
+				$scope.noticeUrl=noticeUrl;
+			}).error(function(){
+				showRefresh();
+			})
+			/*品牌选择*/
+			$scope.currentIndex=0;//默认第一个有样式
+			$scope.noticeClick=function(index){
+				$scope.currentIndex=index;//保存当前选择的Li
+				$("#wellContent .wellContent").eq(index).show().siblings().hide();
+			}
+		});
+		/************************************TODO:申明addNoticeCtrl控制器，发布公告页面************************************/
+		app.controller('addNoticeCtrl',function($scope,$http){
+			$http.get('data/addNotice.php?type=brandname').success(function(data){
+				//console.log(data);
+				$scope.data=data;
+				//$scope.shangpin="";//定义空的商品数据 ng-model="shangpin"
+				//$scope.shangpin=$scope.data.	shangpin; //商品内容 赋值
+				$("#pushContent").click(function(){
+					var chooseP=$scope.pinpai.brandname; //获取品牌内容
+					// var chooseS=$scope.shangpin;       //获取商品内容
+					var chooseId=$scope.pinpai.brand_id;       //获取品牌id
+					//console.log(chooseP);
+					//console.log(chooseId);
+					var addContent=$('[id="addCount"]').val();
+					$.post('data/addNotice.php?type=add',{'pp':chooseP,'id':chooseId,'addc':addContent},function(data){
+							//console.log(data);
+						if(data=='1'){
+							//alert("发布成功！");
+							showMessage("发布成功！");
+							window.history.back(-1);
+						}else{
+							//alert("发布失败！");
+							showMessage("发布失败！");
+						}
+					})/*数据提交结束*/
+				});/*点击事件结束*/
+			});/*获取数据结束*/
+		})/*控制器结束*/
+/*************************************TODO:plugCtrl控制器，应用插件页面**********************************/
+		app.controller('plugCtrl',function($scope,$http,$location){
+			var mySwiper = new Swiper('.swiper-container',{ /*轮播图*/
+				direction: 'horizontal', /*设置水平滑动*/
+				autoplay:3000,/*每隔3秒自动播放*/
+				pagination: '.swiper-pagination',//分页图标
+				paginationClickable: true,//分页点击
+			});			
+			$http.get('data/plug.php?type=click').success(function(data){/*判断用户是否是第一次点击进入该页面*/
+			   //console.log(data);
+			   $scope.plug=data.plug;//动态获取用户进入plug页面状态
+			   $scope.pluglist=data.pluglist;//动态获取用户进入pluglist页面状态
+			   if($scope.plug==0){//如果为0，就进入下面操作
+			   		$('#plugTitp').show();//显示操作提示页面			   		
+					$scope.closeTitp=function(number){/*插件页面关闭操作提示*/
+					   $("#plugTitp").hide();//点击关闭
+					   $http.get('data/ajax.php?type=plug&number='+number).success(function(data){//点击关闭提示传参数通过后台更新该用户在数据表tgs_agent里plug字段的状态
+							 //console.log(data);
+							})
+					};
+			   	}else{//如果不为0，就执行下面代码
+			   		$scope.closeTitp=function(number){
+					   $("#plugTitp").hide();}
+			   	}
+				if($scope.pluglist==0){//判断用户是否是第一次进入pluglist页面
+			   	/*已安装应用页面*/
+			   		$('.hasIntallTitp').show();//第一次进去显示操作提示
+					$scope.inTitp=function(){
+					   $(".oneTitp").hide();
+					   $(".twoTitp").show()
+					};
+					$scope.showTitp=function(){
+					   $(".twoTitp").hide();
+					   $(".threeTitp").show()
+					};
+					$scope.pzTitp=function(){
+					   $(".threeTitp").hide();
+					   $(".fousTitp").show();
+					};
+					$scope.wheyTitp=function(){
+					   $(".fousTitp").hide();
+					   $(".fiveTitp").show();
+					};
+					$scope.newTitp=function(number){
+					   	$(".hasIntallTitp").hide();
+					   	 $http.get('data/ajax.php?type=pluglist&number='+number).success(function(data){
+					   	 	//点击关闭提示传参数通过后台更新该用户在数据表tgs_agent里pluglist字段的状态			
+						})
+					};					
+				}else{//如果用户不是第一次进入pluglist页面
+					$scope.inTitp=function(){
+					   $(".oneTitp").hide();
+					   $(".twoTitp").show()
+					}
+					$scope.showTitp=function(){
+					   $(".twoTitp").hide();
+					   $(".threeTitp").show()
+					}
+					$scope.pzTitp=function(){
+					   $(".threeTitp").hide();
+					   $(".fousTitp").show();
+					}
+					$scope.wheyTitp=function(){
+					   $(".fousTitp").hide();
+					   $(".fiveTitp").show();
+					}
+					$scope.newTitp=function(number){
+					   $(".hasIntallTitp").hide();
+					}
+				}
+
+				$scope.plugQ=function(){
+				   $("#plugTitp").show();
+				};
+				/*已安装页面点击问号，弹出提示操作步骤*/
+				$scope.plugListQ=function(){
+			  	 	$(".hasIntallTitp").show();
+			   		$(".oneTitp").show().siblings().hide();
+				}
+			})//判断用户第一次进入plug,pluglist页面功能结束
+
+			//加载应用插件列表数据
+			$http.get('data/plug.php?type=plug').success(function(data){
+			   //console.log(data);
+			   $scope.hasMore=true;
+			   $scope.yyongData=data;
+			});
+			/*应用插件列表-----加载更多*/
+			$scope.loadMorePlug=function(){
+			   if($scope.loading||!$scope.hasMore) return;//防止重复查询，每次上拉只执行一次查询请求
+			   $scope.loading=true;
+			   $http.get('data/plug.php?type=plug&start='+$scope.yyongData.length).success(function(data){
+			      $scope.loading=false;
+			      $scope.yyongData=$scope.yyongData.concat(data);
+			      if(data.length<5){
+			         $scope.hasMore=false;
+			      }
+			   })
+			};
+			/*加载已安装应用数据*/
+			$http.get('data/plug.php?type=pluglist').success(function(data){
+					//console.log(data);
+				   $scope.hasMore=true;
+ 					$scope.checked=data;
+				   $scope.lookyy=function(){//点击查看原因的功能
+				      var content = $('#content').html();
+				      $('.sms').html(content);
+				      $('.sms').css('display','block');
+				      $('.bgg').css('display','block');
+				      $(".sms").delay(2000).fadeOut("fast");
+				      $(".bgg").delay(2000).fadeOut("fast");
+				   }
+				   /*查看已安装插件列表---加载更多功能*/
+				   $scope.loadMoreList=function(){
+				      if($scope.loading||!$scope.hasMore) return;//防止重复查询，每次上拉只执行一次查询请求
+				      $scope.loading=true;
+				      $http.get('data/plug.php?type=pluglist&starts='+$scope.checked.length).success(function(data){			
+				         $scope.loading=false;
+				         $scope.checked=$scope.checked.concat(data);
+				         if(data.length<5){
+				            $scope.hasMore=false;
+				         }
+				      })
+				   }//pluglist已安装应该加载更多功能结束
+ 				$scope.newadd=function(index){//已安装应用活动结束之后新建活动功能
+					//console.log(index);
+					var table =$(".reset #table").eq(index).val();//获取app数据表名
+					var appid =$(".reset #appid").eq(index).val();//app应用的ID
+					var basicid =$(".reset #basicid").eq(index).val();//获取该app对应表数据的id
+					var checked =$(".reset #checked").eq(index).val();//审核的状态
+					var endtime =$(".reset #endtime").eq(index).val();//获取活动结束时间
+					//console.log(basicid);
+					$.ajax({//通过ajax去传值
+						url:"data/ajax.php?type=newactivity",
+						type:"post",
+						data:{'table':table,'appid':appid,'basicid':basicid,'checked':checked,'endtime':endtime},
+						success:function(data){
+							//console.log(data);
+							if(data==1){//返回1说明可以新建活动页面跳转到config页面
+								window.location.href="#/config?type="+table+"&appid="+appid+"&id="+basicid;
+							}
+							if(data==2){//返回2说明活动还没结束
+								showMessage("您当前有个活动正在进行中，结束之后才能新建下一个活动！");
+							}
+						}
+					})//ajax交互结束
+				}//新建活动功能结束
+			})//加载pluglist数据结束
+		});//整个plug控制器结束
+/*************************************TODO:installCtrl控制器，应用安装页面**********************************/
+			app.controller('installCtrl',function($scope,$http,$location){//安装页面的控制器
+				var installUrl=$location.url().split("=")[1];//获取页面路径
+				$scope.installUrl=installUrl;
+				//console.log($scope.installUrl);
+				if(!$scope.installUrl){return};
+				$http.post('data/install.php?type=appid&appid='+$scope.installUrl).success(function(data){
+						$scope.data=data;
+					})
+				//通过正常安装程序插入安装数据
+					$scope.install=function(){
+						var appid = $('#appid').val();
+						var table = $('#table').val();
+						//console.log(appid);
+						$.ajax({
+							url:'data/install.php?type=install',
+							type:'post',
+							data:{'appid':appid},
+							 success:function(data){
+							 	// console.log(data);	
+							 if(data==1){
+							 	 	window.location.href='#/config?type='+table+'&appid='+appid;
+								 }else{
+								 	 window.location.href="#/plug";
+								 }
+							 }
+						})
+					}
+				});
+		/*************************************TODO:configCtrl控制器，安装页面**********************************/
+		app.controller('configCtrl',function($scope,$http,$location,$rootScope){
+			  $scope.Urlone=$location.url().split("?")[1].split("=")[1];//获取url的参数
+			  $scope.Urltwo=$location.url().split("?")[1].split("=")[2];//获取url的参数
+			  $scope.Urlthree=$location.url().split("?")[1].split("=")[3];//获取url的参数
+				if(!$scope.Urlone && !$scope.Urlthree && !$scope.Urltwo){
+					return false;
+				};	
+				$http.get('data/plug.php?type=click').success(function(data){//动态查询config页面用户第一次进入的功能
+				   		//console.log(data);
+					   $scope.configStatus=data.config;
+					  if($scope.configStatus==0){//为0就弹出操作提示
+					  	//alert(111);
+						   	/*配置步骤提示功能*/
+						   	$('#configTitp').show();
+							$scope.oneStep=function(){
+							   $(".oneTitp").hide();
+							   $(".twoTitp").show();
+							};
+							$scope.twoStep=function(){
+							   $(".threeTitp").show();
+							   $(".twoTitp").hide();
+							};
+							$scope.threeStep=function(){
+							   $(".fousTitp").show();
+							   $(".threeTitp").hide();
+							};
+							$scope.fousStep=function(number){
+							   $("#configTitp").hide();
+							   $http.get('data/ajax.php?type=config&number='+number).success(function(data){
+									console.log(data);
+								})
+							};
+					   }else{//不为0通过点击？功能显示操作提示
+					   		$scope.oneStep=function(){
+							   $(".oneTitp").hide();
+							   $(".twoTitp").show();
+							};
+							$scope.twoStep=function(){
+							   $(".threeTitp").show();
+							   $(".twoTitp").hide();
+							};
+							$scope.threeStep=function(){
+							   $(".fousTitp").show();
+							   $(".threeTitp").hide();
+							};
+							$scope.fousStep=function(){
+							   $("#configTitp").hide();
+							}	
+					   }	
+				})
+				/*配置页面点击问号，弹出操作步骤提示*/
+				$scope.configQ=function(){
+				   $("#configTitp").show();
+				   $(".oneTitp").show().siblings().hide();
+				}
+				$http.get('data/config.php?type=config&appid='+$scope.Urltwo).success(function(data){
+					//console.log(data);
+					$scope.uid = data.uid;//用户ID
+					$scope.appid = data.appid;
+					$scope.installId = data.in_id;
+					$scope.table = data.apptable;
+					$scope.listarray = data.listarray;
+					// /console.log($scope.listarray);
+					var listdata = eval("("+$scope.listarray+")");
+					//console.log(listdata);
+					$scope.listdata=listdata;
+					$scope.plugList=[
+					    {img:'xiaobai',reimg:'xiaobai2',name:'效果演示',template:'tpl/include/xiaoguo.html'},
+					   	{img:'shenhe',reimg:'shenhe2',name:'提交审核',template:'tpl/include/shenhe.html'},
+					   	{img:'results',reimg:'results2',name:'查看结果',template:'tpl/include/jieguo.html'},
+					]
+					$scope.datat = $.merge($scope.listdata,$scope.plugList);//江两个数组组成一个数组
+				//console.log($scope.data);
+				//console.log($scope.datat);
+				$scope.currentIndex=0;
+				$scope.config=function(index){//点击切换模块的功能
+					$scope.currentIndex=index;
+					$scope.len=$scope.datat.length; //获取数组长度，
+				   //console.log(index);
+				   $(".config>div").eq(index).show().siblings().hide(); 			
+				}
+			});
+			//及时获取填写的数据
+			if($scope.Urlthree){//通过新建活动功能进入查询实时数据
+				$http.get('data/config.php?type=newadd&table='+$scope.Urlone+'='+$scope.Urltwo+'='+$scope.Urlthree).success(function(data){
+					$scope.newdata = data;
+					//console.log($scope.newdata);
+					$scope.rankdata = data.ranking;
+				//console.log($scope.rankdata);
+					if(!$scope.rankdata){
+						$scope.rankdata=[{}];//定义一个空的数组
+						$scope.addPm=function(index){ /*添加排名功能*/
+							$scope.rankdata.push({}); //添加一个空的内容
+						}
+					}else{
+						var	rankdata = eval("("+$scope.rankdata +")");
+						//console.log(rankdata);
+						$scope.rankdata = rankdata;
+						$scope.addPm=function(index){ /*添加排名功能*/
+						$scope.rankdata.push({}); //添加一个空的内容
+						}
+					}
+				})
+			}else{//正常安装程序查询实时数据
+				$http.get('data/config.php?type=basicconfig&table='+$scope.Urlone+'='+$scope.Urltwo).success(function(data){
+				$scope.newdata = data;
+				//console.log($scope.newdata);
+				$scope.rankdata = data.ranking;
+				console.log($scope.rankdata);
+				if(!$scope.rankdata){
+					$scope.rankdata=[{}];//定义一个空的数组
+					$scope.addPm=function(index){ /*添加排名功能*/
+						$scope.rankdata.push({}); //添加一个空的内容
+					}
+				}else{
+					var	rankdata = eval("("+$scope.rankdata +")");
+					//console.log(rankdata);
+					$scope.rankdata = rankdata;
+					$scope.addPm=function(index){ /*添加排名功能*/
+						$scope.rankdata.push({}); //添加一个空的内容
+					}
+				}
+				})
+			}
+			/*删除排名奖按钮*/
+			$scope.delePm=function(index){
+				//console.log($scope.rankdata.length);
+				if($scope.rankdata.length>1){
+					$scope.rankdata.splice(index,1);
+				}
+			};
+			//基础配置功能模块开始
+			$(function(){//上传图片预览功能
+				$("#xFile").change(function() {
+					var $file = $(this);
+					var fileObj = $file[0];
+					var windowURL = window.URL || window.webkitURL;
+					var dataURL;
+					var $img = $("#preview");
+					if(fileObj && fileObj.files && fileObj.files[0]){
+					dataURL = windowURL.createObjectURL(fileObj.files[0]);
+					$img.attr('src',dataURL);
+					}else{
+					dataURL = $file.val();
+					var imgObj = document.getElementById("preview");
+					// 两个坑:
+					// 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+					// 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+					imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+					imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+					}
+				});
+			})
+			//基础配置信息模块1
+			$scope.sumbit=function(){//通过ajax上传图片和form表单数据，使用FormData对象；
+		      	var form = new FormData(document.getElementById("form"));//实例化一个对象
+		      	var table = $('#table').val();
+		     		//console.log(table);
+		            $.ajax({
+		                url:"data/formupload.php?type="+table,
+		                type:"post",
+		                data:form,
+		                processData:false,
+		                contentType:false,
+		                success:function(data){
+		                	//console.log(data);
+		                   var data = eval("("+data+")");
+		                    if(data==1){
+		                    	showMessage("活动名称不能为空！",'name');
+		                    }
+		                    if(data==2){
+		                    	showMessage("请选择活动开始时间",'startime');
+		                    }
+		                    if(data==3){
+		                    	showMessage("请选择活动结束时间",'endtime');
+		                    }
+		                 	if(data==4){
+		                    	showMessage("请上传二维码",'libian');
+		                    }
+		                    if(data==5){
+		                    	showMessage("上传文件太大",'libian');
+		                    }
+		                    if(data==6){
+		                    	showMessage("上传文件类型不符",'libian');
+		                    }
+		                    if(data==6){
+		                    	showMessage("上传文件类型不符",'libian');
+		                    }
+		                    if(data==7){
+		                    	showMessage("同名的文件已经存在了",'libian');
+		                    }
+		                    if(data==8){
+		                    	showMessage("移动文件出错",'libian');
+		                    }
+		                    if(data.error==9){	
+		                    	var id = data.id;
+								$rootScope.id = id;		          
+		                    	showMessage("活动添加成功，请继续填写下面内容！",'button');                 	
+		                     }
+		                    if(data==10){
+		                    	showMessage("活动添加失败，请重新填写资料！",'button');	
+		                    }
+		                     if(data==11){
+		                    	showMessage("修改成功！",'button');
+		                    }
+		                    if(data==12){
+		                    	showMessage("修改失败！请填写要修改的内容",'button');	
+		                    }
+		                    if(data==13){		                 
+		                    	showMessage("活动开始时间必须大于当前时间，活动审核时间为1-2天",'startime');
+		                    }
+		                    if(data==14){
+		                    	showMessage("活动结束时间不能小于活动开始时间",'endtime');	
+		                    } 
+		                }		 
+		           	 });     			
+				}//submit提交功能结束
+			//config模块2数据提交功能
+			$scope.submitone=function(){
+			//通过ajax上传图片和form表单数据，使用FormData对象；
+		      	var form = new FormData(document.getElementById("formone"));//实例化一个对象
+		      	var table = $('#tableone').val();
+		      		//console.log(table);
+		            $.ajax({
+		                url:'data/formone.php?type='+table,
+		                type:"post",
+		                data:form,
+		                processData:false,
+		                contentType:false,
+		                success:function(data){
+		                   console.log(data);
+		                    if(data==1){
+		                    	showMessage("随机奖名称不能为空！",'randomname');
+		                    }
+		                    if(data==2){
+		                    	showMessage("请填写随机几率",'odds');
+		                    }
+		                    if(data==3){
+		                    	showMessage("请填写完整排名奖信息",'rank');
+		                    }
+		                 	if(data==4){
+		                    	showMessage("添加排名信息成功，请继续填写下面内容！",'buttonone');
+		                    }
+		                    if(data==5){
+		                    	showMessage("添加排名信息失败，请重新填写！",'buttonone');
+		                    }
+		                    if(data==6){
+		                    	showMessage("修改排名信息成功！",'buttonone');
+		                    }
+		                    if(data==7){
+		                    	showMessage("修改排名信息失败，请重新修改！",'buttonone');
+		                    }
+		                }
+		           	 });     			
+				}
+				$scope.check=function(){
+					//获取要提交的参数
+					var	checkid = $('#checkid').val();
+					var	table = $('#checktable').val();
+					var	appid = $('#appid').val();
+					var	cuid = $('#cuid').val();
+					var	installId = $('#installId').val();
+					var	phone = $('#phone').val();
+					var	id = $('#id').val();
+					var	newid = $('#newid').val();
+					var	nexttableid = $('#nexttableid').val();
+						//console.log(id);
+					var reg=/^0?1[3|4|5|8][0-9]\d{8}$/;//正则验证手机号码
+					if(phone=="")
+					{ 
+						showMessage("手机号不能为空",'phone');
+						return false;
+					}
+					if(!reg.test(phone))
+					{
+						showMessage("请填写正确的手机号码",'phone');
+						return false;
+					}
+					$.ajax({
+                		url:'data/check.php?type=check',
+                		type:'post',
+                		data:{'checkid':checkid,'appid':appid,'cuid':cuid,'installId':installId,'phone':phone,'table':table,'id':id,'nexttableid':nexttableid,'newid':newid},
+                		success:function(data){
+                			console.log(data);
+                			if(data==1){
+                				showMessage("提交审核成功，请等待后台管理员审核！",'checked');
+                				setTimeout(function(){
+								window.location.href='#/plug';
+								},2000)
+                			}if(data==2) {
+                				showMessage("提交审核失败，请重新提交！",'checked');
+                			}if(data==3) {
+                				showMessage("修改成功，请等待后台管理员审核！",'checked');
+                				setTimeout(function(){
+									window.location.href='#/plug';
+								},2000)
+                			}
+                			if(data==4) {
+                				showMessage("修改失败，请重新提交！",'checked');
+                			}
+                		}
+	                })//ajax 交互结束
+				}//审核提交功能结束
+					/*ifram设置宽度高度*/
+					$('#gameCanvas').css("width",$(window).width());
+					$('#gameCanvas').css("height",$(window).height());
+//					$('.gameCanvas').css("width",$(window).width());
+
+//					$('.gameCanvas').css("height",$(window).height());
+//					$("#pmBtn").css({"position":"absolute","bottom":"70px"})
+			})//config控制器结束
+		/***********************************TODO:申明dataCtrl控制器，数据分析页面***********************************/
+		app.controller('dataCtrl',function($scope,$http,$rootScope){
+			/*TODO:选择品牌功能*/
+			$http.get('data/sales.php?type=Sendout').success(function(data){
+				//console.log(data);
+				$scope.pinpaiData=data;
+				//TODO:品牌点击事件
+				$scope.currIndex=0; //默认第一个有样式
+				$scope.oneClick=function(index){
+					$scope.currIndex=index; //保存当前被点击的li
+					$scope.activeArr=$scope.pinpaiData[index];//切换品牌
+					$(".item .UL2").eq(index).slideToggle().siblings().hide();/*数据分析页面的二级菜单功能*/
+					$(".item p").show();
+				};
+				//TODO:内容点击事件
+				$scope.choseIndex=0; //默认第一个有样式
+				$scope.twoClick=function(index){
+					$scope.choseIndex=index;//保存当前被点击的li
+					$scope.activeBid=$scope.activeArr.bid;//获取品牌id
+					$scope.activeGid=$scope.activeArr.goods[index].gid;//获取商品id
+					/*图表数据加载*/
+					//var main = document.getElementById("main");
+					var main = document.getElementsByClassName("main")[0];
+					//用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
+					var resizeMainContainer = function () {
+						main.style.width = window.innerWidth+'px';
+						main.style.height = window.innerHeight/2+'px';
+					};
+					//设置容器高宽
+					resizeMainContainer();
+					//初始化图表
+					var myChart = echarts.init(main);
+					var option = null;
+					// 初始 option
+					option = {
+						/*title: {
+						 text: '异步数据加载示例'
+						 },*/
+						grid:{ /*grid属性控制边距*/
+							x:50,
+							y:10
+						},
+						tooltip : {
+							trigger: 'axis',
+							axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+								type : 'line'        // 默认为直线，可选为：'line' | 'shadow'
+							}
+						},
+						/*legend: {
+						 data:['销量']
+						 },*/
+						xAxis: {
+							data: [],
+							type : 'category',
+							boundaryGap : false,
+							axisLabel:{
+								rotate:45, //刻度旋转45度角,
+								interval: 0, //interval 是指间隔多少个类别画栅格，为 0 时则每个数据都画，为 1 时间隔 1 个画，以此类推。
+								textStyle:{
+									color:"red", //刻度颜色
+									fontSize:10  //刻度大小
+								}
+							}
+						},
+						dataZoom: [  // 这个dataZoom组件，默认控制x轴。
+							{		//type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+								type:'inside',
+								start: 10,      // 左边在 10% 的位置。
+								end: 100         // 右边在 100% 的位置。
+							}
+						],
+						yAxis: {},
+						series: [{
+							name: '销量',
+							type: 'line',
+							data: [],
+							label: { /*数据提示*/
+								normal: {
+									show: true,
+									position: 'top'
+								}
+							}
+						}]
+					};
+					myChart.showLoading();
+					$http({/*品牌id 商品id传给后台*/
+						url:'data/timegetdata.php',
+						method:'GET',
+						params:({
+							"bid":$scope.activeBid,
+							"gid":$scope.activeGid
+						})
+					}).success(function(data){
+						myChart.hideLoading();
+						console.log(data);
+						myChart.setOption({
+							xAxis: {
+								data: data.data  /*x轴 日期*/
+							},
+							series: [{
+								// 根据名字对应到相应的系列
+								name: '销量',
+								data: data.time
+								   /*数据*/
+							}]
+						});
+					});
+
+					//用于使chart自适应高度和宽度
+					window.onresize = function () {
+						//重置容器高宽
+						resizeMainContainer();
+						myChart.resize();
+					};
+					if (option && typeof option === "object") {
+						myChart.setOption(option, true);
+					}
+				}
+			});
+
+			$scope.BrandOptions=function(){
+				$(".dataUl").toggle();
+			};
+			$(".container-fluid").click(function(){
+				$(".dataUl").hide();
+			});
+
+		})/*控制器结束*/
+		/******************************销售排名页面************************************/
+		app.controller('salesRankingCtrl',function($scope,$http){
+			$http({/*默认读取第一个代理数据*/
+				url:'data/salesRank.php?type=dl_lings',
+				method:'GET',
+				params:({
+					"bid":1,
+					"gid":14,
+					"dlID":1,
+				})
+			}).success(function(data) {
+				console.log(data);
+				$scope.rkData=data;
+
+			})/*ajax---end*/
+			$('.data_type').change(function(){
+				var selectValue=($(this).val());
+				console.log(selectValue);
+			});
+			$('.date_type').change(function(){
+				console.log($(this).val());
+			})
+			/*TODO:选择品牌功能*/
+			$http.get('data/sales.php?type=Sendout').success(function(data){
+				//console.log(data);
+				$scope.pinpaiData=data;
+				//TODO:品牌点击事件
+				$scope.oneClick=function(index){
+					$scope.currIndex=index; //保存当前被点击的li
+					$scope.activeArr=$scope.pinpaiData[index];//切换品牌
+					$(".item .UL2").eq(index).slideToggle().siblings().hide();/*数据分析页面的二级菜单功能*/
+				};
+				//TODO:内容点击事件
+				$scope.twoClick=function(index){
+					$scope.activeBid=$scope.activeArr.bid;//获取品牌id
+					$scope.activeGid=$scope.activeArr.goods[index].gid;//获取商品id
+					$scope.activeSid=$scope.activeArr.goods[index].sid; //库存ID
+					$scope.activeSP=$scope.activeArr.goods[index].goods_name;//获取商品名称
+					$(".select_data").html($scope.activeSP);
+					$(".dataUl").toggle();
+
+					//console.log($scope.activeBid,$scope.activeGid);
+					$http({/*品牌id 商品id传给后台*/
+						url:'data/salesRank.php?type=dl_lings',
+						method:'GET',
+						params:({
+							"bid":$scope.activeBid,
+							"gid":$scope.activeGid
+
+						})
+					}).success(function(data) {
+						//console.log(data);
+						$scope.rkData=data;
+
+					})/*ajax传参---end*/
+
+				}/*商品点击---end*/
+
+			});
+			$scope.salesRank=function(){ /*选择商品*/
+				$(".dataUl").toggle(100);
+			};
+
+		})/*salesRankingCtrl----end*/
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+     		<!-- 提交申请2-->
+            <div class="container" style="margin-top:15px;" ng-controller="configCtrl">
+             <form class="shenq">
+                 <input type="hidden" name="id" id="id" class="form-control" value="{{id}}">
+                  <input type="hidden" name="newid" id="newid"  class="form-control" value="{{newdata.id}}">
+                 <input type="hidden" name="appid" id="appid" class="form-control" value="{{appid}}">
+                 <input type="hidden" name="nexttableid" id="nexttableid" class="form-control" value="{{Urlthree}}">
+                <input type="hidden" name="uid" id="cuid" class="form-control" value="{{uid}}">
+                <input type="hidden" name="installId" id="installId" class="form-control" value="{{installId}}"> 
+                <input type="hidden" name="checkid" id="checkid" class="form-control" value="{{newdata.c_id}}">
+                <input type="hidden" name="table" id="checktable" class="form-control" value="{{table}}">
+                <input type="number" id="phone" class="form-control" placeholder="请填写手机号码" value="{{newdata.tel}}" required/>
+                <button class="btn btn-success btn-block" ng-click="check()" id="checked" style="margin-top:15px;" >提交审核</button>
+            </form>
+            </div>
+ 

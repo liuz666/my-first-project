@@ -1,0 +1,60 @@
+<div ng-controller="personalCtrl">
+    <!--头部导航-->
+    <nav class="navbar  navbar-fixed-top geren">
+        <h4 class="text-center text-success back_index" >
+            <a href="#/start" class="pull-left pull" style="position:absolute;left:20px;top:17px;">
+                <img src="img/back.png" alt="" height="20px"/>
+            </a>
+            <div style="color:#000;font-weight:bold;">个人中心</div>
+        </h4>
+        <!-- 个人中心头像资料信息-->
+        <div class="row text-center ">
+            <p class=""><img class=" img-circle " src="img/header.png" width="100px" height="100px" ></p>
+            <div >{{name}} <a href="#/personalDetail"><img src="img/xiugai.png" alt=""/></a></div>
+        </div>
+    </nav>
+    <!--主体内容-->
+    <div style="height:55px;width:100%;"></div>
+    <div class="container-fluid"  style="margin-top:190px;">
+        <!-- 个人内容-->
+        <div class="placeholderLoad" style="margin-left:-15px;margin-top:-190px;">
+            <img src="img/load.gif" alt="加载中.....">
+            <a href="javascript:location.reload()" style="display:none;"><p class="text-center">点击我刷新重试</p></a>
+        </div>
+
+        <!--列表组内容-->
+        <div class="row" style="margin-top:20px;">
+            <ul class="list-group">
+                <a href="#/mypinpai" class="list-group-item">我的商品<img src="img/right.png" alt="" class="listImg img-responsive"/></a>
+                <a href="#/personalNewKc" class="list-group-item" id= "kuncun" style="display:none;">新建库存<img src="img/right.png" alt="" class="listImg"/></a>
+                <a href="#/salesRecord" class="list-group-item">发货记录<img src="img/right.png" alt="" class="listImg"/></a>
+                <a href="#/apply_for" class="list-group-item">品牌申请<img src="img/right.png" alt="" class="listImg"/></a>
+                 <a href="#/opinion" class="list-group-item">意见反馈<img src="img/right.png" alt="" class="listImg"/></a>
+            </ul>
+        </div>
+       <!-- 脱离按钮-->
+        <div  >
+            <button class="liBtn" data-toggle="modal" data-target="#myModal">脱离团队</button>
+            <div style="font-size:12px;color:#ACACAC" class="text-center">上面的功能是匿名的。<br></div>
+            <div style="font-size:12px;color:#ACACAC">让您整条队伍以及下线脱离掉家的统计和品牌统计，请谨慎操作。</div>
+        </div>
+        <!-- 脱离团队模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+                        <h4 class="modal-title" id="myModalLabel">脱离团队提示</h4>
+                    </div>
+                    <div class="modal-body">确认脱离团队吗？</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" ng-click="moveTeam()">确认脱离</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+    </div>
+
+</div>

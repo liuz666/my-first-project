@@ -1,0 +1,50 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <h4 class="text-center text-success back_index" ><a href="#/start" class="pull-left pull" style="font-size:16px;">返回</a>申请代理等级</h4>
+</nav>
+<!--内容-->
+ <div style="height:70px;width:100%;"></div>
+<div class="container-fluid" ng-controller="upgradeCtrl">
+<!-- 品牌选择-->
+    <div class="row">
+        <ul class="choose">
+            <li ng-repeat="data in upgradedata"  ng-class={'defaultClass':$index!=currentIndex,'activeClass':$index==currentIndex} ng-click="noticeClick($index)" >{{data.brandname}}</li>
+          
+        </ul>
+    </div>
+<div class="formParent">
+  <div class="dengji" ng-repeat="data in upgradedata">
+  <form  role="form" method="post" enctype="multipart/form-data" action="data/sqdengji.php?type=sjdengji" ng-repeat="brand in data.content">
+    <input type="hidden" name="brandid" class="form-control"  value="{{data.brand_id}}" required>
+    <input type="hidden" name="id" class="form-control"  value="{{brand.id}}" required>
+     <div class="form-group">
+        <input type="text" name="agentid" class="form-control"  placeholder="代理编号" value="{{brand.agentid}}" required>
+      </div>
+
+      <div class="form-group">
+        <input type="text" name="name" class="form-control"  placeholder="姓名" value="{{brand.name}}" required>
+      </div>
+      <div class="form-group">
+        <input type="text" name="weixin" class="form-control" placeholder="微信号" value="{{brand.weixin}}" required>
+      </div>
+      <div class="form-group">
+        <input type="text" name="dengji" class="form-control"  placeholder="目前等级" value="{{brand.dengjiname}}" required>
+
+        <input type="hidden" name="jibie" class="form-control"  placeholder="目前级别" value="{{brand.jibie}}" required>
+      </div>
+      <!-- <div class="form-group">
+        <input type="text" name="qq" class="form-control"  placeholder="QQ" value="">
+      </div> -->
+      <div class="form-group">
+        <select class="form-control" name="sqdengji">
+        <option ng-repeat="dengji in data.dengji" value="{{dengji.jibie}}">{{dengji.djname}}</option>
+      </select>
+      </div>
+       <div class="form-group">
+          <input id="file-Portrait1" type="file" name="upfile">
+      </div>
+        <input type="submit" class="btn btn-success btn-block" style="background-color:#146ff4" value="提交申请">
+    </form>
+  </div>
+
+</div>
+</div>

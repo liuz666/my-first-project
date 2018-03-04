@@ -1,0 +1,34 @@
+<!--头部导航-->
+<nav class="navbar  navbar-fixed-top">
+    <h4 class="text-center text-success back_index" >
+        <a href="#/personal" class="pull-left pull" style="font-size:16px;">返回</a>
+        <div class="title">新建库存</div>
+    </h4>
+</nav>
+<!--中间内容-->
+<div style="height:60px;width:100%;"></div>
+<div class="container-fluid" ng-controller="personalNewKcCtrl">
+    <form class="form-horizontal" role="form">
+        <div class="row text-center" id="select">
+            <select class="select" name="chooseP"  ng-model="pinpai" ng-options="pinpai.brand_name for pinpai in data">
+                <option value=""  class="chooseP">请选择品牌</option>
+            </select>
+            <select class="select" name="chooseS" ng-change="choosePS()" ng-model="shangpin" ng-options="shangpin for shangpin in pinpai.goods">
+                <option value=""  class="chooseS">请选择商品</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="addBox" class="col-sm-4 col-xs-4 text-center">新增箱数：</label>
+            <div class="col-sm-8 col-xs-8">
+                <input type="text" class="form-control" id="addBox" placeholder="请输入箱数" value="{{dataBig}}" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="addCount" class="col-sm-4 col-xs-4 text-center">新增盒数：</label>
+            <div class="col-sm-8 col-xs-8">
+                <input type="text" class="form-control" id="addCount" placeholder="请输入盒数" value="{{dataSmall}}" required>
+            </div>
+        </div>
+        <button class="btn btn-success btn-block addKc">添加库存</button>
+    </form>
+</div>

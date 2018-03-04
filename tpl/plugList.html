@@ -1,0 +1,118 @@
+
+<div ng-controller="plugCtrl" style="height:100%;width:100%;background:#EEEEEE;">
+    <!--头部导航-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <h4 class="text-center text-success back_index" >
+            <a href="#/plug" class="pull-left pull" style="font-size:16px;">返回</a>
+            <div class="title">已安装应用</div>
+             <div class=" " style="position:absolute;right:20px;top:18px;cursor:pointer;" ng-click="plugListQ()">
+                <img src="img/question.png" alt="" width="20"/>
+            </div>
+        </h4>
+    </nav>
+    <!-- 主体内容-->
+    <div style="height:60px;width:100%;"></div>
+    <div class="container-fluid">
+    <!-- demo演示提示-->
+        <div class="row yanshi">
+            <div  style="width:100%;height:60px;margin-left:-15px;">
+                <div class="col-xs-3" >
+                    <img ng-src="img/focusWe.jpg" alt="" width="60" height="60"/>
+                </div>
+                <div class="col-xs-9">
+                    <!-- 第一行-->
+                    <div  style="padding-right:10px;">
+                        <p class="pull-left">插件演示</p >
+                        <div class="pull-right"><p>通过</p ></div>
+                    </div>
+                </div>
+            </div>
+            <div style="width:100%;height:25px;">
+                <a class="in2">进入</a>
+                <div  class="results2">查看结果</div>
+                <div  class="reset2">配置</div>
+                <div  class="reset2">查看原因</div>
+                <div  class="reset2">新建活动</div>
+            </div>
+        </div>
+        <div ng-repeat="ed in checked" infinite-scroll="loadMoreList()" window="true" distance="200">
+            <div class="row statusList">
+                <div class="col-xs-3">
+                    <img ng-src="img/{{ed.appimg}}" alt="" width="70" height="70" />
+                </div>
+                <div class="col-xs-9">
+                    <div class="row" style="padding-right:10px;">
+                        <p class="pull-left">{{ed.apptitle}}</p>
+
+                        <div ng-switch="{{ed.checked}}">
+                        <p ng-switch-when="2" class="pull-right">已通过</p>
+                        <div  ng-switch-when="1" class="pull-right">审核中</div>
+                        <p ng-switch-when="0" class="pull-right">已拒绝</p>
+                        </div>
+                    </div>
+                    <div ng-switch="{{ed.checked}}">   
+                        <div ng-switch-when="2" class="row" style="padding-right:10px;">
+                         <p class="pull-rigth">活动时间：{{ed.starttime*1000 | date:'yyyy-MM-dd'}}/{{ed.endtime*1000 | date:'yyyy-MM-dd'}}</p>
+                            <a href="" class="inActive">进入</a>
+                            <a href="" class="results">查看结果</a>
+                            <a ng-click="newadd($index)" id="newadd" class="reset">新建活动
+                                <input type="hidden" id="table" value="{{ed.apptable}}">
+                                <input type="hidden" id="appid" value="{{ed.appid}}">
+                                <input type="hidden" id="basicid" value="{{ed.basic_id}}">
+                                <input type="hidden" id="checked" value="{{ed.checked}}">
+                                <input type="hidden" id="endtime" value="{{ed.endtime}}">
+
+                            </a>
+                        </div>
+                        <div ng-switch-when="0" class="row" style="padding-right:10px;">
+                            <a class="results" ng-click="lookyy()">查看原因</a>
+                            <a ng-click="newadd($index)" id="newadd" class="reset">新建活动
+                                <input type="hidden" id="table" value="{{ed.apptable}}">
+                                <input type="hidden" id="appid" value="{{ed.appid}}">
+                                <input type="hidden" id="basicid" value="{{ed.basic_id}}">
+                                <input type="hidden" id="checked" value="{{ed.checked}}">
+                                <input type="hidden" id="endtime" value="{{ed.endtime}}">
+                            </a>
+                            <div id="content" style="display:none">{{ed.reason}}</div>
+                         </div>
+                        <div ng-switch-when="1" class="row pull-right" style="padding-right:10px;">
+                            <a href="#/config?type={{ed.apptable}}&appid={{ed.appid}}" class="in">重新配置</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+         
+           <div ng-show="loading" class="text-center">正在加载中...</div>
+            <p class="alert alert-info" ng-hide="hasMore">没有更多数据可以加载了！</p> 
+         <div class='sms'></div>
+        <div class='bgg'></div>
+    </div>
+    <!-- 操作步骤功能提示-->
+        <div class="hasIntallTitp" style="display:none;">
+            <div class="oneTitp">
+                <div class="inTitp">进入应用前端页面，可分享朋友圈界面已达到营销传播的效果<div class="triangle-up"></div></div>
+                <div class="nextStep"  ng-click="inTitp()">下一步</div>
+            </div>
+
+            <div class="twoTitp">
+                <div class="showTitp">查看后台   应用对应的后台。需要时刻关注<div class="triangle-up"></div></div>
+                <div class="nextStep" ng-click="showTitp()">下一步</div>
+            </div>
+
+            <div class=" threeTitp">
+                <div class="pzTitp">配置  若应用还未提交，进入后继续配置相关的营销内容<div class="triangle-up"></div></div>
+                <div class="nextStep" ng-click="pzTitp()">下一步</div>
+            </div>
+
+            <div class=" fousTitp">
+                <div class="whyTitp">查看原因   查看管理员所拒绝的原因，再从新配置<div class="triangle-up"></div></div>
+                <div class="nextStep" ng-click="wheyTitp()">下一步</div>
+            </div>
+
+            <div class="fiveTitp">
+                <div class="newTitp">新建活动  结束后，可以新建活动，从新开始一轮新的营销活动<div class="triangle-up3"></div></div>
+                <div class="nextStep" ng-click="newTitp(1)">操作完成关闭提示</div>
+            </div>
+        </div>
+</div>

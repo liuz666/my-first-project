@@ -1,0 +1,50 @@
+<div ng-controller="forgetCtrl">
+    <!--找回密码背景图片-->
+    <div class="bg"></div>
+    <!--login图片-->
+    <div class="text-center" style="width:100%">
+        <!--<img src="img/title3.png" class="img-responsive" width="200" style="margin:35px auto"/>-->
+        <h2 class="title">找回您的密码</h2>
+    </div>
+    <!--输入框-->
+    <div class="container-fluid">
+        <form>
+                <p class="loginName">
+                    <span></span>
+                    <input type="text" name="Username" id="phone" autocomplete="on" placeholder="手机号" required>
+                </p>
+                <p class="yzm">
+                    <input type="text" name="yzm" id="code"  autocomplete="off" placeholder="输入验证码"  required/>
+                    <input id="send" value="获取验证码"/>
+                    <input type="hidden" id="code1" value=>
+                    <input type="hidden" id="pid" value=""/>
+                </p>
+                <p class="loginPw">
+                    <span></span>
+                    <input type="password" name="Password" id="pwd" autocomplete="off" placeholder="新密码"  value="" required/>
+                </p>
+                <!-- 找回密码按钮-->
+                <p style="margin: 10px auto;">
+                    <input type="submit" name="B1"  value="提交信息" ng-click="reg()" class="loginBtn"/>
+                </p>
+        </form>
+        <!-- 联系我们-->
+        <p  class="forgetPw" ng-click="contact()">如有疑问,请联系我们!</p>
+        <form class="form-horizontal" style="display:none">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="formGroupInputLarge">姓 名</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="
+                    formGroupInputLarge" placeholder="name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="formGroupInputSmall">联系电话</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="formGroupInputSmall" placeholder="phone">
+                </div>
+            </div>
+            <button class="btn btn-block btn-success">提交联系方式</button>
+        </form>
+    </div>
+</div>

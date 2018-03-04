@@ -1,0 +1,27 @@
+ <!--头部导航-->
+<nav class="navbar navbar-fixed-top">
+    <h4 class="text-center text-success back_index" >
+        <a href="#/personal" class="pull-left pull" style="font-size:16px;color:#000;">返回</a>
+        <div style="font-weight:bold;color:#000;" class="title">品牌申请</div>
+    </h4>
+</nav>
+<!--内容-->
+<div style="height:70px;width:100%;"></div>
+<div class="container-fluid">
+    <form role="form" method="post" enctype="multipart/form-data" action="data/form.php?type=apply_for" class="shenq">
+      <div class="form-group">
+        <input type="text" name="name" class="form-control"  placeholder="姓名" value="" required>
+      </div>
+      <div class="form-group">
+        <input type="text" name="weixin" class="form-control" placeholder="微信号" value="" required>
+      </div>
+      <div class="form-group">
+        <input type="text" name="phone" class="form-control"  placeholder="手机号" value="" required>
+      </div>
+      <div class="form-group">
+        <input type="text" name="brandname" class="form-control" id="exampleInputPassword1" placeholder="品牌名称" value="" required>
+      </div>
+        <p class="text-center">留下您的信息，稍后我们有客服联系您！</p>
+        <input type="submit" class="btn btn-success btn-block" style="background-color:#146ff4" value="确认提交">
+</form>
+</div>

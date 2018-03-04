@@ -1,0 +1,75 @@
+<div ng-controller="dataCtrl" style="height:100%;">
+    <!--头部导航-->
+    <nav class="navbar  navbar-fixed-top">
+        <h4 class="text-center text-success back_index" >
+            <a href="#/start" class="pull-left pull" style="font-size:16px;">返回</a>
+            <div class="title">数据分析</div>
+            <div  class="glyphicon glyphicon-align-justify salesActive" ng-click="BrandOptions()">
+                <div class="dataUl" style="display:none" ng-controller="salesCtrl">
+                    <ul>
+                        <li class="item" ng-click="oneClick($index)" ng-repeat="pin in pinpaiData">{{pin.brand_name}}
+                            <ul class="UL2 "  >
+                                <li  ng-repeat="c in pin.goods" ng-click="twoClick($index)">{{c.goods_name}}</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </h4>
+    </nav>
+    <!--主体内容-->
+    <div style="height:55px;width:100%;"></div>
+    <div class="container-fluid" style="height:76%;">
+        <ul class="dataBox" role="tablist" style="border:none;padding-bottom:15px;">
+            <li class="active"><a href="data/#an1" role="tab" data-toggle="tab">代理数据</a></li>
+            <li><a href="data/#an2" role="tab" data-toggle="tab">增员数据</a></li>
+            <li><a href="data/#an3" role="tab" data-toggle="tab">零售数据</a></li>
+        </ul>
+        <!-- 内容展示区域-->
+        <div class="tab-content" style="margin-top:30px;overflow:hidden;">
+            <!-- 代理数据-->
+            <div class="tab-pane " id="an1">
+                <ul class="hours  " role="tablist">
+                    <li class="active"><a href="data/#d24" role="tab" data-toggle="tab">24H</a></li>
+                    <li class=""><a href="data/#d7" role="tab" data-toggle="tab">7天</a></li>
+                    <li class=""><a href="data/#d30" role="tab" data-toggle="tab">30天</a></li>
+                </ul>
+                <div class="tab-content" style="margin-top:20px;width:100%;border:1px solid red;">
+                    <div class="tab-pane active main" id="d24" style="width:100%;">代理24小时图表内容</div>
+                    <div class="tab-pane " id="d7">代理7天图表内容</div>
+                    <div class="tab-pane " id="d30">代理30天图表内容</div>
+                </div>
+            </div>
+            <!-- 增员数据-->
+            <div class="tab-pane" id="an2">
+                <ul class="hours " role="tablist">
+                    <li class="active"><a href="data/#z24" role="tab" data-toggle="tab">增员24H</a></li>
+                    <li class=""><a href="data/#z7" role="tab" data-toggle="tab">增员7天</a></li>
+                    <li class=""><a href="data/#z30" role="tab" data-toggle="tab">增员30天</a></li>
+                </ul>
+                <div class="tab-content" style="margin-top:70px;">
+                    <div class="tab-pane active" id="z24">增员24小时图表内容</div>
+                    <div class="tab-pane " id="z7">增员7天图表内容</div>
+                    <div class="tab-pane " id="z30">增员30天图表内容</div>
+                </div>
+            </div>
+            <!-- 零售数据-->
+            <div class="tab-pane" id="an3">
+                <ul class="hours " role="tablist">
+                    <li class="active"><a href="data/#l24" role="tab" data-toggle="tab">零售24H</a></li>
+                    <li class=""><a href="data/#l7" role="tab" data-toggle="tab">零售7天</a></li>
+                    <li class=""><a href="data/#l30" role="tab" data-toggle="tab">零售30天</a></li>
+                </ul>
+                <div class="tab-content" style="margin-top:70px;">
+                    <div class="tab-pane active" id="l24">零售24小时图表内容</div>
+                    <div class="tab-pane " id="l7">零售7天图表内容</div>
+                    <div class="tab-pane " id="l30">零售30天图表内容</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 脚部-->
+        <a href="" style="display:block;width:100%;margin-left:-15px;padding:4% 0;text-align:center;position:fixed;bottom:0;background:#FF5001;color:#fff;">查看销售排名</a>
+    </div>
+</div>

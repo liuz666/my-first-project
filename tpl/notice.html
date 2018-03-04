@@ -1,0 +1,40 @@
+<!--头部导航-->
+<nav class="navbar navbar-fixed-top">
+    <h4 class="text-center text-success back_index" >
+        <a href="#/start" class="pull-left pull" style="font-size:16px;">返回</a>
+        <div class="title">公告栏</div>
+        <div style="position:absolute;top:17px;right:15px;">
+            <a href="#/addNotice" class="glyphicon glyphicon-plus addNotice " title="添加公告"></a>
+        </div>
+    </h4>
+</nav>
+<!--主体内容-->
+<div style="height:60px;width:100%;"></div>
+<div class="container-fluid" ng-controller="noticeCtrl">
+    <div class="placeholderLoad" style="margin-left:-15px;">
+        <img src="img/load.gif" alt="加载中.....">
+        <a href="javascript:location.reload()" style="display:none;"><p class="text-center refresh">点击我刷新重试</p></a>
+    </div>
+    <!-- 品牌选择-->
+    <div class="row">
+        <ul class="choose">
+            <li ng-repeat="data in noticeData"  ng-class={'defaultClass':$index!=currentIndex,'activeClass':$index==currentIndex} ng-click="noticeClick($index)" >{{data.brandname}}</li>
+
+        </ul>
+    </div>
+    <!-- 公告内容-->
+    <div id="wellContent">
+        <div class=" wellContent" id="notice" ng-repeat="data in noticeData">
+            <div style="border:1px solid #ddd;border-radius:6px;padding-bottom:20px;background:#eee;margin-bottom:20px;" ng-repeat="gonggao in data.content">
+                <!-- 等级、发布时间-->
+                <div class=" noticeTitle">
+                    <div class="col-md-5 col-sm-5 col-xs-5" style="padding:0px;"><span><b></b>{{gonggao.name}}({{gonggao.dengjiname}})</span></div>
+                    <div class="col-md-7 col-sm-7 col-xs-7 " style="padding-left:5px;padding-right:5px;"><i>{{ gonggao.times}}</i></div>
+                </div>
+                <!-- 详细内容-->
+                <div class="noticeContent">{{gonggao.content}}</div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,38 @@
+<!--头部导航-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <h4 class="text-center text-success back_index" >
+        <a href="#/personal" class="pull-left pull" style="font-size:16px;">返回</a>
+        <div class="title">修改资料</div>
+    </h4>
+</nav>
+<!--主体内容-->
+<div class="container-fluid" ng-controller="personalDetailCtrl">
+    <div class="placeholderLoad" style="margin-left:-15px;">
+        <img src="img/load.gif" alt="加载中.....">
+        <a href="javascript:location.reload()" style="display:none;"><p class="text-center">点击我刷新重试</p></a>
+    </div>
+  <form>
+    <div class="form-group">
+       <p>修改个人资料：</p>
+    </div>
+    <div class="form-group">
+        <input type="text" name="name" id="name" class="form-control"  placeholder="姓名" value="{{name}}">
+    </div>
+    <div class="form-group">
+        <input type="text" name="weixin" id="username" class="form-control"  placeholder="微信号" value="{{weixin}}" readonly="readonly">
+    </div>
+    <div class="form-group">
+        <input type="text" name="phone" id="phone" class="form-control"  placeholder="手机号" value="{{phone}}" readonly="readonly">
+    </div>
+     <div class="form-group">
+       <p>修改个人密码：</p>
+    </div>
+     <div class="form-group">
+        <input type="password" name="password" class="form-control" id="password" placeholder="新密码" value="">
+    </div>
+    <div class="form-group">
+        <input type="password" name="repassword" class="form-control"  placeholder="再次确认新密码" id="repassword" value="">
+    </div>
+    <button type="submit" id="submit" class="btn btn-success btn-block" style="background-color:#146ff4">确认提交</button>
+</form>
+</div>

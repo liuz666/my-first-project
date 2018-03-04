@@ -1,0 +1,72 @@
+<html >
+<head>
+	<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8">-->
+	<!--<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=3.0, user-scalable=yes">-->
+
+	<meta content="yes" name="apple-mobile-web-app-capable">
+
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+
+	<meta content="telephone=no" name="format-detection">
+
+	<title>经销商登录</title>
+
+    <link rel="stylesheet" href="../mblogin/style_mb/css/Jingle.css?r=20150505">
+
+    <link rel="stylesheet" href="../mblogin/style_mb/css/app.css">
+
+    <link href="../mblogin/style_mb/css/alertify.core.css" rel="stylesheet" type="text/css">
+
+    <link href="../mblogin/style_mb/css/alertify.default.css" rel="stylesheet" type="text/css">
+<style>
+
+	#loginHtml {
+
+	  width:90%;
+
+	  margin:10px auto;
+
+	}
+
+</style>
+</head>
+<body >
+	<div id="aside_container" ng-controller="loginCtrl">
+	<div class="loaderBox">
+   		<!-- <img ng-src="img/start.png" class="img-responsive" alt=""/> -->
+   </div>
+   <div class="bg"></div>
+</div>
+		<div id="section_container">
+			<section id="index_section" class="active" >
+				<header>
+					<nav class="left"></nav>
+					<h1 class="title">代理商登录</h1>
+					<nav class="right">
+						<a data-target="section" data-icon="info" href="#"></a>
+					</nav>
+				</header>
+				<form name="Login">
+					<div class="contents">
+						<div class="info_head_img" id="info_head_img">
+							<i class="icon user"></i>
+						</div>
+
+						<div id="loginHtml">
+							<input type="text" name="Username" id="item1" list="cars" class="int" autocomplete="on" placeholder="代理账号（微信号或者手机号）" value="{{username}}" required>
+							<input type="password" name="Password" id="item2"class="int" autocomplete="off" placeholder="密    码"  value="{{password}}" required/>
+							<p style="margin: 10px auto;">
+								<input type="hidden" name="brand_id" value="{{loginUrl}}"class="button block" id="brand_id" />
+								<input type="submit" id="submit" name="B1" value="登录"class="button block" />
+							</p>
+						</div>
+					</div>
+				</form>
+
+			</section>
+
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<div ng-controller="salesRankingCtrl" style="height:100%";>
+    <!--头部导航-->
+    <nav class="navbar  navbar-fixed-top">
+        <h4 class="text-center text-success back_index" >
+            <a href="#/data" class="pull-left pull" style="font-size:16px;">返回</a>
+            <div class="title">销售排名</div>
+            <div  class="glyphicon glyphicon-align-justify salesActive" >
+
+            </div>
+        </h4>
+    </nav>
+
+    <div style="height:55px;width:100%;"></div>
+    <div class="container-fluid" >
+        <!--<div class="placeholderLoad" style="margin-left:-15px;margin-top:0px;">-->
+            <!--<img src="img/load.gif" alt="加载中.....">-->
+            <!--<a href="javascript:location.reload()" style="display:none;"><p class="text-center refresh">点击我刷新重试</p></a>-->
+        <!--</div>-->
+        <!-- 数据类型选项-->
+        <div class="row "  style="padding:10px 0;">
+            <select   class="data_type select_type">
+                <option value="-1">请选择类型</option>
+                <option value="1">代理数据</option>
+                <option value="2">增员数据</option>
+                <option value="0">零售数据</option>
+            </select>
+            <select  class="date_type select_type">
+                <option value="-1">请选择排名</option>
+                <option value="day">日排名</option>
+                <option value="week">周排名</option>
+                <option value="month">月排名</option>
+            </select>
+            <!-- 商品选项-->
+            <div ng-click="salesRank()" class="select_data">选择商品 </div>
+        </div>
+        <!-- 选择商品二级菜单-->
+        <div class="dataUl" >
+            <ul class="item">
+                <li class=""  ng-click="oneClick($index)" ng-repeat="pin in pinpaiData">{{pin.brand_name}}
+                    <ul class="item_box">
+                        <!--<p style="display:block;margin-top:10px;font-size:12px;color:#000;">查看全部</p>-->
+                        <li  ng-repeat="c in pin.goods" ng-click="twoClick($index)">{{c.goods_name}}</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 内容展示区域-->
+        <div  style="margin-top:20px;text-align:center;margin-left:-15px;margin-right:-15px;overflow:hidden;">
+            <!-- 数据排名-->
+            <div class="row listPM" ng-repeat="cc in rkData">
+                <div class="col-xs-2">
+                    <div  class="mc" ng-bind="$index+1">1</div>
+                </div>
+                <div class="col-xs-2">
+                    <img src="img/erweima.png" class="img-circle" width="50"/>
+                </div>
+                <div class="col-xs-4" style="padding-right:0px;">
+                    <div style="margin-top:2px;font-size:18px;">{{cc.name}}</div>
+                    <div style="color:#C0C0C0">{{cc.weixin}}</div>
+                </div>
+                <div class="col-xs-4" >
+                    <div class="score" > {{cc.buyall}}盒</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

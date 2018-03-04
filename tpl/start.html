@@ -1,0 +1,159 @@
+﻿<div ng-controller="startCtrl">
+    <!-- 3张引导页-->
+    <div class="swiper-container" style="display:none;height:100%;width:100%;">
+        <div class="swiper-wrapper" style="height:100%;width:100%;">
+            <div class="swiper-slide"><img src="img/yindao1.jpg" style="display:block;height:100%;width:100%;"></div>
+            <div class="swiper-slide"><img src="img/yindao2.jpg" style="display:block;height:100%;width:100%;"></div>
+            <div class="swiper-slide">
+                <img src="img/yindao3.jpg" style="display:block;height:100%;width:100%;">
+                <button ng-click="inStart()" class="inStart btn btn-success">进入首页</button>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+    <!--头部导航-->
+    <nav class="navbar  navbar-fixed-top navbar-inverse" style="background:#FFCF25;border:none;">
+        <h4 class="text-center text-success back_index" >
+            <div  style="cursor:pointer;position:absolute;left:20px;top:19px;" ng-click="startRefresh()">
+                <img src="img/refresh.png" alt="" width="20"/>
+            </div>
+            <div style="color:#000;font-weight:bold;">首 页</div>
+            <div class=" " style="font-size:16px; position:absolute;right:20px;top:18px;cursor:pointer;" ng-click="focusWe()">
+                <img src="img/erweima.png" alt="" width="20"/>
+            </div>
+        </h4>
+    </nav>
+    <div style="height: 1px; width: 100%"></div>
+    <!-- 关注我们弹出框-->
+    <div class="focusWe">
+        <div>
+            <div class="close" ng-click="closeFocus()">&times;</div>
+            <!--<div class="text-center">二维码</div>-->
+            <p class="text-center">
+                <img ng-src="img/focusWe.jpg" alt="二维码"  style="clear:both;" width="200">
+            </p>
+            <div class="text-center">关注二维码,打开更方便！</div>
+        </div>
+    </div>
+    <!-- 主体内容 -->
+    <div class="container-fluid startSection" >
+        <!-- 新手引导页面-->
+        <div id="startTitp" style="margin-left:-15px;display:none;">
+            <!-- 第一步 进入第二页-->
+            <div id="oneBtn">
+                <div class="titp-1"><img src="img/icon-01.png" class="img-responsive text-center" alt=""/></div>
+                <div class="titp-2" ng-click="nextBtn1()"><img src="img/icon-02.png" class="img-responsive text-center" alt=""/></div>
+            </div>
+            <!-- 第二步 进入第三页-->
+            <div id="twoBtn">
+                <div class="sendFriend"><img src="img/next2.png" class="img-responsive text-center" alt="邀请朋友"/></div>
+                <!--<div class="nextSend col-md-4 col-sm-4 col-xs-4"><img src="img/next.png" class="img-responsive " alt="下线邀请"/></div>-->
+                <div class="titp-2" ng-click="nextBtn2()"><img src="img/icon-02.png" class="img-responsive text-center" alt=""/></div>
+            </div>
+            <!-- 第三步 关闭引导页-->
+            <div id="threeBtn">
+                <div class="zeroSend"><img src="img/kuc2.png" class="img-responsive text-center" alt="零售代理发货"/></div>
+                <!--<div class="sale col-md-4 col-sm-4 col-xs-4"><img src="img/kuc.jpg" class="img-responsive " alt="库存管理"/></div>-->
+                <div class="titp-2" ng-click="nextBtn3(1)"><img src="img/icon-02.png" class="img-responsive text-center" alt=""/></div>
+            </div>
+        </div>
+        <!-- 头像个人信息-->
+        <div class="row startHead">
+            <!--<img src="img/013.png" class="img-responsive" alt=""/>-->
+            <div  style="padding-top:0px;padding-bottom:0;">
+                <div class="media">
+                    <div class="pull-left"><img class="media-object img-circle " ng-src="img/header.png" width="80px" height="80px" ></div>
+                    <div class="media-body">
+                        <!--<div class="media" style="margin-top:25px;">姓名:{{name2}}</div>-->
+                        <!--<div class="media">等级:{{dengji}}</div>-->
+                        <!--<div class="media text-success">申请升级</div>-->
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row"><div class="info">姓名: {{username}}</div></div>
+                            <div class="row"><div class="info">等级: {{dengji}}</div></div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <a href="#/upgrade"> <div style="margin-top:62px;" class="update text-success"> 申请升级</div></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 公告内容-->
+        <div class="row"  id="gg">
+            <a href="#/notice" >
+                <img src="img/start01.png"  width="20" style="margin-top:-6px;" /> <b>加载中...</b>
+                <span ng-repeat="newContetn in datat | orderBy:'id':true | limitTo:1">最新公告：{{newContetn.content}}</span>
+            </a>
+        </div>
+        <!-- 消息通知-->
+            <a href="#/suerGoods" class="alerts" >
+                最新消息通知 <span class="badge">{{number}}</span>
+            </a>
+        
+        <div class="row" style=" height:10px;background:#ccc;margin-top:0px;"></div>
+        <!-- 九宫格 -->
+         <ul class="startUl row" >
+            <li  style="border-bottom:1px solid #ccc;border-right:1px solid #ccc;">
+                <a href="#/sales">
+                    <img src="img/sales.png"  class="img-responsive center-block"/>
+                    <div>销售管理</div>
+                </a>
+            </li>
+            <li style="border-bottom:1px solid #ccc;border-right:1px solid #ccc;">
+                <a href="#/next_inviter">
+                    <img src="img/yaoqing.png"  class="img-responsive center-block"/>
+                    <div>代理邀请</div>
+                </a>
+            </li>
+            <li style="border-bottom:1px solid #ccc;" ng-click="studyFocus(0)">
+                <a href="#/help">
+                    <img src="img/study.png"  class="img-responsive center-block"/>
+                    <div>操作教程</div>
+                </a>
+            </li>
+            <!-- 第二行-->
+            <li style="border-bottom:1px solid #ccc;border-right:1px solid #ccc;">
+                <a href="#/data"><!--href="#/data"-->
+                    <img src="img/data.png"  class="img-responsive center-block"/>
+                    <div>数据分析</div>
+                </a>
+            </li>
+            <li style="border-bottom:1px solid #ccc;border-right:1px solid #ccc;">
+                <a href="#/personal">
+                    <img src="img/personal.png"  class="img-responsive center-block"/>
+                    <div>个人中心</div>
+                </a>
+            </li>
+            <li style="border-bottom:1px solid #ccc;">
+                <a href="#/gives" >
+                    <img src="img/gives.png"  class="img-responsive center-block"/>
+                    <div>授权证书</div>
+                </a>
+            </li>
+            <!-- 第三行-->
+            <li style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;">
+                <a href="#/notice">
+                    <img src="img/notice.png"  class="img-responsive center-block"/>
+                    <div>公告系统</div>
+                </a>
+            </li>
+            <li style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;">
+                <a href="#/next_management">
+                    <img src="img/gli.png"  class="img-responsive center-block"/>
+                    <div>下级管理</div>
+                </a>
+            </li>
+           <li style="border-bottom:1px solid #ccc;">
+                 <a href="#/plug"><!-- ng-click= "plug()" -->
+                     <img src="img/opinion.png"  class="img-responsive center-block"/>
+                     <div>应用插件</div>
+                     <div class='sms'></div>
+                     <div class='bgg'></div>
+                 </a>
+             </li>
+        </ul>
+    </div>
+</div>
+
+

@@ -1,0 +1,49 @@
+<div ng-controller="plugCtrl" class="plugCtrl">
+        <!--头部导航-->
+        <nav class="navbar navbar-fixed-top">
+            <h4 class="text-center text-success back_index" >
+                <a href="#/start" class="pull-left pull" style="font-size:16px;">返回</a>
+                <div class="title">应用插件</div>
+                <div class=" " style="position:absolute;right:20px;top:18px;cursor:pointer;" ng-click="plugQ()">
+                    <img src="img/question.png" alt="" width="20"/>
+                </div>
+            </h4>
+            <!-- 轮播图-->
+            <div class="swiper-container" >
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="img/plug/login.png" height="150" width="100%"></div>
+                    <div class="swiper-slide"><img src="img/plug/login2.png" height="150" width="100%"></div>
+                    <div class="swiper-slide"><img src="img/plug/login.png" height="150" width="100%"></div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </nav>
+        <!-- 主体内容-->
+        <div class="container-fluid" style="margin-top:210px;margin-bottom:0px;" infinite-scroll="loadMorePlug()" window="true" distance="200">
+            <div class="row statusList" ng-repeat="plug in yyongData ">
+                <div class=" col-xs-3" >
+                    <img ng-src="img/{{plug.appimg}}" alt="" width="80" height="80"/>
+                </div>
+                <div class="col-xs-6 text-center" style="padding-top:10px;">
+                    <b>{{plug.apptitle}}</b>
+                    <div style="margin-top:5px;">已有{{plug.number}}人开通</div>
+                </div>
+                <div class=" col-xs-3 text-center"  style="line-height:80px;padding-left:0px;" ng-switch="{{plug.status}}">
+                    <a  href="#/install?type={{plug.appid}}" ng-switch-when="0" class="install" >安装</a>
+                    <a  href="#/config?type={{plug.apptable}}&appid={{plug.appid}}" ng-switch-when="1"  class="peizhi" >配置</a>
+                    <a ng-switch-when="2" class="Installed">已安装</a>
+                </div>
+            </div>
+        </div>
+        <div ng-show="loading" class="text-center">正在加载中...</div>
+        <p class="alert alert-info" ng-hide="hasMore">没有更多数据可以加载了！</p>
+
+        <!-- 查看已安装应用-->
+        <a href="#/plugList" class="seePlug">查看已安装应用</a>
+        <!-- 提示安装引导-->
+        <div id="plugTitp" style="display:none">
+            <div class="installTitl">选择你要用的营销插件,点击安装<div class="triangle-up1"></div></div>
+            <div class="closeTitp" ng-click="closeTitp(1)">关闭提示</div>
+        </div>
+</div>

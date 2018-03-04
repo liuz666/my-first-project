@@ -1,0 +1,73 @@
+<!--头部导航-->
+<nav class="navbar  navbar-fixed-top">
+    <h4 class="text-center text-success back_index" >
+        <a href="javascript:history.go(-1);" class="pull-left pull" style="font-size:16px;">返回</a>
+        <div class="title">发货记录</div>
+    </h4>
+</nav>
+<!--中间主体内容-->
+<div style="height:60px;width:100%;"></div>
+<div ng-controller="salesRecordCtrl" class="container-fluid">
+    <div class="placeholderLoad" style="margin-left:-15px;">
+        <img src="img/load.gif" alt="加载中.....">
+        <a href="javascript:location.reload()" style="display:none;"><p class="text-center refresh">点击我刷新重试</p></a>
+    </div>
+    <div class="row">
+        <ul class="choose">
+            <li class="activeClass ">代理发货</li>
+            <li>零售发货</li>
+        </ul>
+    </div>
+
+    <div class="record">
+        <div class="row"  infinite-scroll="loadMores()" window="true" distance="200"> <!--代理发货记录-->
+            <div class="sales_well" ng-repeat="order in agentData">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div ><img  class=" img-responsive center-block"  ng-src="../upload/{{order.goods_pic}}"></div>
+
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8">
+                        <div class="row" style="margin-top:10px;"><p> {{order.goods_name}}</p ></div>
+                        <div class="row"><p >一共 {{order.order_big}} 箱，{{order.order_small}} 盒</p></div>
+                        <div class="row"><p >收货人: {{order.name}}</p></div>
+                        <div class="row status" ng-switch="{{order.order_inspected}}">
+                           <!--  <p ng-switch-when="0">收货状态：未发货</p>
+ -->                            <p ng-switch-when="1"><img src="img/shuiy.png" alt="" width="50"/></p>
+                            <p ng-switch-when="2"><img src="img/shuiy2.png" alt="" width="50"/></p>
+                        </div>
+                        <!-- <div class="row" ng-switch="{{order.order_inspected}}">
+                            <p ng-switch-when="0">收货状态：未发货</p>
+                            <p ng-switch-when="1">收货状态：未收货</p>
+                            <p ng-switch-when="2">收货状态：已收货</p>
+                        </div> -->
+                        <div class="row" ng-switch="{{order.order_inspected}}">
+                           <!--  <p ng-switch-when="0">收货时间: 暂未收货</p> -->
+                            <!-- <p ng-switch-when="1">收货时间: 暂未收货</p> -->
+                            <p ng-switch-when="2">收货时间:{{order.shou_time*1000 | date:'yyyy-MM-dd hh:mm'}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="display:none" infinite-scroll="loadMore()" window="true" distance="200"> <!--零售发货记录-->
+            <div class="sales_well" ng-repeat="order in resaledata" >
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div style="height:100%;width:100%;border-radius:50%;"><img  class=" img-responsive center-block"  ng-src="../upload/{{order.goods_pic}}"></div>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8">
+                        <div class="row" style="margin-top:10px;"><p><b>商品名称:</b> {{order.goods_name}}</p ></div>
+                        <div class="row"><p >一共 {{order.order_big}} 箱，{{order.order_small}} 盒</p></div>
+                         <div class="row"><p>发货时间:{{order.order_time*1000 | date:'yyyy-MM-dd hh:mm'}}</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- 加载更多按钮-->
+    <!--<button class="btn btn-success btn-block" ng-click="loadMore()" ng-show="hasMore">加载更多</button>-->
+    <div ng-show="loading" class="text-center">正在加载中...</div>
+    <p class="alert alert-info" ng-hide="hasMore">没有更多数据可以加载了！</p>
+</div>

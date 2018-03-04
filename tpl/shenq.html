@@ -1,0 +1,18 @@
+<!--头部导航-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <h4 class="text-center text-success back_index" >
+        <a href="#/personal" class="pull-left pull" style="font-size:16px;">返回</a>
+        <div class="title">添加代理</div>
+    </h4>
+</nav>
+<!--内容-->
+<!--中间内容-->
+<div class="container-fluid" style="margin-top:15rem;" ng-controller="shenqCtrl">
+    <form action="data/form.php?type=shenq" role="form" method="post">
+        <div class="form-group" style="margin-bottom:12rem;">
+         <input type="text" name="brand_name" class="form-control"  value="{{brand_name}}"  style="height:5rem;text-align:center;">
+         <input type="hidden" name="bid" class="form-control"  value="{{brand_id}}"  style="height:5rem;text-align:center;">
+        </div>
+        <input  type="submit" class="btn btn-success btn-block" value="确认添加"/>
+    </form>
+</div>

@@ -1,0 +1,35 @@
+
+	<div id="aside_container" ng-controller="loginCtrl">
+		<div class="loaderBox"><!--启动背景图-->
+			<!--<img ng-src="img/start.png" class="img-responsive" alt=""/>-->
+		</div>
+		<div class="bg"></div><!--登录背景图片-->
+		<div id="section_container">
+			<section id="index_section" class="active" >
+				<form name="Login" >
+					<!--login图片-->
+					<div class="text-center" style="width:100%">
+						<img src="img/title3.png" class="img-responsive" width="200" style="margin:35px auto"/>
+					</div>
+					<!--输入框-->
+					<div class="container-fluid" style="margin-top:50px;">
+						<p class="loginName">
+							<span></span>
+							<input type="text" name="Username" id="item1" autocomplete="on" placeholder="微信号或者手机号" value="{{username}}" required>
+						</p>
+						<p class="loginPw">
+							<span></span>
+							<input type="password" name="Password" id="item2"  autocomplete="off" placeholder="密    码"  value="{{password}}" required/>
+						</p>
+						<!-- 登录按钮-->
+						<p style="margin: 10px auto;">
+							<input type="hidden" name="brand_id" value="{{loginUrl}}" id="brand_id" class="button block"/>
+							<input type="submit" name="B1" value="登 录" id="submit" class="loginBtn"/>
+						</p>
+						<!-- 忘记密码-->
+						<a href="#/forget" class="forgetPw">忘记密码?</a>
+					</div>
+				</form>
+			</section>
+		</div>
+	</div>

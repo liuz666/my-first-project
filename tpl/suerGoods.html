@@ -1,0 +1,22 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <h4 class="text-center text-success back_index" >
+        <a href="#/start" class="pull-left pull" style="font-size:16px;">返回</a>
+        <div class="title">确认收货</div>
+    </h4>
+</nav>
+<!--主体内容-->
+<div style="height:55px;width:100%;"></div>
+<div class="container-fluid" ng-controller="suerGoodsCtrl">
+        <div class="modal-dialog" ng-repeat = "data in suerGoods" >
+            <div class="modal-content" ng-if="data.flag">
+                <div class="modal-header">
+                    <h4 class="modal-title" >消息通知:{{data.number}}</h4>
+                </div>
+                <div class="modal-body">收到{{data.brand_name}},{{data.goods_name}} {{data.order_big}}箱,{{data.order_small}}盒</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="cancelGoodsBtn($index,data)">取消</button>
+                    <button type="button" class="btn btn-primary" ng-click="suerGoodsBtn($index,data)">确认收货</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+</div>

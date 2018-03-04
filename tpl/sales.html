@@ -1,0 +1,94 @@
+<div ng-controller="salesCtrl">
+    <!--头部导航-->
+    <nav class="navbar  navbar-fixed-top">
+        <h4 class="text-center text-success back_index" >
+            <a href="#/start" class="pull-left pull" style="font-size:16px;">返回</a>
+            <div class="title">销售管理</div>
+            <div  class="glyphicon glyphicon-align-justify salesActive" ng-click="salesActive()" ng-mouseleave="salesLeave()">
+                <!--<img src="img/record.png" alt="" height="30"/>-->
+                <ul class="salesUl">
+                    <div class="tri"></div>
+                    <li><img src="img/record.png" alt="" width="12" /><a href="#/salesRecord">发货记录</a></li>
+                    <!-- <li>xxx</li> -->
+                </ul>
+            </div>
+        </h4>
+    </nav>
+<!--中间主体内容-->
+<div style="height:80px;width:100%;"></div>
+<div  class="container-fluid" >
+    <div class="row" infinite-scroll="loadMore()" window="true" distance="200">
+        <div class="placeholderLoad" >
+            <img src="img/load.gif" alt="加载中.....">
+             <a href="javascript:location.reload()" style="display:none;"><p class="text-center refresh">点击我刷新重试</p></a>
+        </div>
+        <p style="border:1px solid #ddd;"></p>
+        <div class="sales_well" ng-repeat="store in dishList">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div style="height:100%;width:100%;border-radius:50%;"><img  class=" img-responsive center-block"  ng-src="img/{{store.goods_pic}}"></div>
+
+                </div>
+                <div class="col-md-8 col-sm-8 col-xs-8">
+                    <div class="row" style="margin-top:10px;"><p><b>商品名称:</b> {{store.goods_name}}</p ></div>
+                    <div class="row"><p>一共 {{store.big}} 箱，{{store.small}} 盒</p ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 加载更多按钮-->
+<!-- <button class="btn btn-success btn-block" ng-click="loadMore()" ng-show="hasMore">加载更多</button> -->
+<div ng-show="loading" class="text-center">正在加载中...</div>
+<p class="alert alert-info" ng-hide="hasMore">没有更多数据可以加载了！</p>
+<div style="height:20px;width:100%;"></div>
+    <!--start 模态框-->
+    <div class="" id="modal"><!--遮罩层-->
+        <div id="mod" ><!--内容-->
+            <!-- 关闭按钮 -->
+            <button type="button" class="close" ><span aria-hidden="true">&times;</span></button>
+            <table style="margin-left:10px;margin-top:10px;">
+                <tr>
+                    <td rowspan="2" style="border:1px solid #ccc;"><img ng-src="img/{{activeImg}}" class="img-responsive" width="100" height="100"/></td>
+                    <td style="padding-left:10px;color:#FE723F" >{{activeArr.brand_name}}: {{activeVal}} </td>
+                </tr>
+            </table>
+            <!-- 模态框主体内容-->
+             <!-- 品牌选项-->
+            <div style="font-weight:bold;margin-left:15px;margin-top:5px;">品牌分类:</div>
+            <div class="row" style=" margin-left:0px; font-size:12px;">
+                <ul class="brand">
+                    <li ng-click="oneClick($index)"  ng-class={'defaultClass':$index!=currIndex,'activeClass':$index==currIndex} ng-repeat="pin in pinpaiData">{{pin.brand_name}}</li>
+                </ul>
+            </div>
+            <!-- 商品内容 模块-->
+            <div style="font-weight:bold;margin-left:15px;">商品分类:</div>
+            <div class="product">
+                <div class="row" style=" margin-left:0px; font-size:12px;">
+                    <ul ng-repeat="u in pinpaiData" class="product_box">
+                        <li ng-repeat="c in u.goods"  ng-class={'defaultClass':$index!=choseIndex,'activeClass':$index==choseIndex} ng-click="twoClick($index)" >{{c.goods_name}}</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 选择商品确认按钮-->
+            <a href="#/sureOrder" type="button" class="btn btn-success btn-block sure_btn" style="">确 认</a>
+        </div><!--内容结束-->
+    </div><!--遮罩层结束-->
+
+
+    <!--脚部导航-->
+    <!--<div ng-include="'tpl/include/footer.html'"></div>-->
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+
+            <ul class="navbar-footer-menu">
+                <li class=" " ng-click="zeroClick()">
+                    <a href="#/zero"> 零售 </a>
+                </li>
+                <li class=" daili" ng-click="twoClick(0)">
+                    <a class=""> <span class="glyphicon glyphicon-plus"></span> 代理发货</a>
+                </li>
+            </ul>
+
+    </nav>
+</div><!--控制器结束-->
+
+</div>

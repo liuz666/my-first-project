@@ -1,0 +1,92 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <h4 class="text-center text-success back_index" >
+        <a href="#/sales" class="pull-left pull" style="font-size:16px;">返回</a>
+        <div class="title">确认订单</div>
+    </h4>
+</nav>
+<div style="height:55px;width:100%;"></div>
+<div ng-controller="salesCtrl" class="container-fluid">
+    <div class="row">
+        <div class="well">
+            <div class="media">
+                <p>产品介绍</p>
+                <a class="pull-left"><img class="media-object  img-responsive" ng-src="../upload/{{img2}}" width="100" height="100"></a>
+                <div class="media-body">
+                    <div class="media">一共 {{activeBig}} 箱，{{activeSmall}} 盒</div>
+                    <div class="media">
+                        <button class="btn btn-info btn-block cha" ng-click="cha()">库存拆分</button>
+                        <button class="btn btn-info btn-block he" ng-click="he()">库存合并</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form>
+        <!-- 发货箱数量-->
+        <div class="row box">
+            <div style="width:20%;text-align:center;height:34px;line-height:34px;">箱数:</div>
+            <div style="width:60%;">
+                <div class="input-group">
+                    <span class="input-group-addon" ng-click="deleBox()">-</span>
+                    <input type="number" min="0" id="dlSmall" name="big" class="form-control"  ng-model="sendBox" ng-focus="ffBig()">
+                    <span class="input-group-addon" ng-click="addBox()">+</span>
+                </div>
+            </div>
+        </div>
+        <!-- 发货盒数量-->
+        <div class="row box">
+            <div style="width:20%;text-align:center;height:34px;line-height:34px;">盒数:</div>
+            <div style="width:60%">
+                <div class="input-group">
+                    <span class="input-group-addon" ng-click="deleCount()">-</span>
+                    <input type="number" min="0" id="smallBox" name="small" class="form-control"  ng-model="sendCount" ng-focus="ffSmall()">
+                    <span class="input-group-addon" ng-click="addCount()">+</span>
+                </div>
+            </div>
+        </div>
+        <!-- 下级代理-->
+        <div class="row next_daili">
+            <div class="list-group">
+                <div class="list-group-item" ng-click="showDailiModl()">
+                    <b>下级</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="DL">请选择代理</i>
+                    <span class="glyphicon glyphicon-play pull-right"></span>
+                </div>
+            </div>
+        </div>
+        <!-- 发货按钮-->
+        <div class="row">
+            <button class="btn btn-danger btn-block send">发 货</button><!--ajax提交数据-->
+        </div>
+    </form>
+
+    <!--下级代理选择 模态框 -->
+    <div class="daiLiMod"><!--遮罩层-->
+        <div class="daiLiContent"><!--弹出内容-->
+            <div class="list-group">
+                <a  class="list-group-item active text-center">
+                    选择代理
+                </a>
+
+                <!-- <a ng-click="selectDaili($index)" ng-repeat="data in selectDailiData" ng-class="{'listBg':currIndex===$index}"
+                   class="list-group-item daili" >
+                    {{data.name}}({{data.dengji}}) <span class="glyphicon glyphicon-heart-empty pull-right"></span>
+                </a> -->
+                <div style="  " class="dlBox">
+                    <a ng-click="selectDaili($index)" ng-repeat="data in selectDailiData" ng-class="{'listBg':currIndex===$index}"
+                       class="list-group-item daili" >
+                        {{data.name}}({{data.dengjiname}}) <span class="glyphicon glyphicon-heart-empty pull-right"></span>
+                    </a>
+
+                    <div id="dlTxt" class="text-center" >暂无下级代理，赶紧邀请下级代理哟！</div>
+                </div>
+                
+                <!-- <div id="dlTxt" class="text-center" >暂无下级代理，赶紧邀请下级代理哟！</div> -->
+            </div>
+    
+            <!-- 关闭选择代理按钮-->
+            <a  type="button" class="btn btn-success btn-block sure_btn" ng-click="colseDailiBtn()">关闭</a>
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,36 @@
+<div ng-controller="installCtrl" style="height:100%;width:100%;position:fixed;background:#EEEEEE;">
+    <!--头部导航-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <h4 class="text-center text-success back_index" >
+            <a href="#/plug" class="pull-left pull" style="font-size:16px;">返回</a>
+            <div class="title">安装应用</div>
+        </h4>
+    </nav>
+    <!-- 主体内容-->
+     <div style="height:60px;width:100%;"></div>
+    <div class="container-fluid">
+        <div class="row statusList" >
+            <div class="col-xs-4">
+                <img ng-src="img/{{data.appimg}}" alt="" width="80"/>
+            </div>
+            <div class="col-xs-8">
+                <b style="margin-top:5px;">{{data.apptitle}}</b>
+                <div style="margin-top:5px;">已有{{data.number}}人开通</div>
+            </div>
+        </div>
+        <!-- 插件应用介绍-->
+        <div class=" well row">
+            <p>文字介绍</p>
+        </div>
+        <div>
+             <img ng-src="img/{{data.content}}" alt="" width="100%"/>
+        </div>
+        <!-- 安装应用-->
+        <div class="row">
+            <a ng-click="install()"  class="installPlug">安装应用</a>
+            <input type="hidden" id="appid" value="{{data.appid}}">
+            <input type="hidden" id="table" value="{{data.apptable}}">
+        </div>
+    </div>
+
+</div>
